@@ -1,8 +1,8 @@
+using Paymaster.Areas.HelpPage.ModelDescriptions;
+using Paymaster.Areas.HelpPage.Models;
 using System;
 using System.Web.Http;
 using System.Web.Mvc;
-using Paymaster.Areas.HelpPage.ModelDescriptions;
-using Paymaster.Areas.HelpPage.Models;
 
 namespace Paymaster.Areas.HelpPage.Controllers
 {

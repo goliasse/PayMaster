@@ -481,6 +481,33 @@
             </summary>
             <param name="documentPath">The physical path to XML document.</param>
         </member>
+        <member name="M:Paymaster.Controllers.AddressController.Get">
+            <summary>
+            List all Address
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Paymaster.Controllers.AddressController.Get(System.Int32)">
+            <summary>
+            Get Address by address Id
+            </summary>
+            <param name="id">Id of the payor to be searched</param>
+            <returns></returns>
+        </member>
+        <member name="M:Paymaster.Controllers.AddressController.Post(Paymaster.Model.Addresses)">
+            <summary>
+            Method to insert/save payor record
+            </summary>
+            <param name="payor">payor records to be inserted/saved</param>
+            <returns></returns>
+        </member>
+        <member name="M:Paymaster.Controllers.AddressController.Put(Paymaster.Model.Addresses)">
+            <summary>
+            Method to insert/save Address
+            </summary>
+            <param name="payor">address to be updated</param>
+            <returns></returns>
+        </member>
         <member name="M:Paymaster.Controllers.EmployeeController.Get">
             <summary>
             List all employees
@@ -528,11 +555,11 @@
             <param name="payor">payor records to be inserted/saved</param>
             <returns></returns>
         </member>
-        <member name="M:Paymaster.Controllers.PayorController.Put(Paymaster.Model.Employees)">
+        <member name="M:Paymaster.Controllers.PayorController.Put(Paymaster.Model.Payors)">
             <summary>
             Method to insert/save payor record
             </summary>
-            <param name="payor">payor records to be inserted/saved</param>
+            <param name="payor">payor records to be updated</param>
             <returns></returns>
         </member>
     </members>

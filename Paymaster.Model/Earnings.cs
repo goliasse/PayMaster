@@ -1,11 +1,9 @@
 using System;
-using System.Text;
-using System.Collections.Generic;
 
-
-namespace Paymaster.Model {
-    
-    public class Earnings {
+namespace Paymaster.Model
+{
+    public class Earnings
+    {
         public virtual int Id { get; set; }
         public virtual Checks Checks { get; set; }
         public virtual int? Employeeid { get; set; }

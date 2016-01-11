@@ -63,7 +63,7 @@
     <Compile Include="Fedallowances.cs" />
     <Compile Include="Fedtaxtables.cs" />
     <Compile Include="FilingStatus.cs" />
-    <Compile Include="Interfaces\IDeletable.cs" />
+    <Compile Include="Interfaces\IIsDeletable.cs" />
     <Compile Include="Interfaces\IIdAble.cs" />
     <Compile Include="Interfaces\ISoftDeletable.cs" />
     <Compile Include="Map\AddressesMap.cs" />

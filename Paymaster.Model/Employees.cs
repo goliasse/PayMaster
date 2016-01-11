@@ -1,15 +1,17 @@
-using System;
 using Paymaster.Model.Interfaces;
+using System;
 
 namespace Paymaster.Model
 {
-    public class Employees: ISoftDeletable, IIdAble<int>
+    public class Employees : ISoftDeletable, IIdAble<int>
     {
         public virtual int Id { get; set; }
         public virtual Payors Payors { get; set; }
         public virtual int? Number { get; set; }
+
         //public virtual bool Active { get; set; }
         public virtual string Socsec { get; set; }
+
         public virtual string Firstname { get; set; }
         public virtual string Lastname { get; set; }
         public virtual string Middlename { get; set; }
@@ -35,9 +37,7 @@ namespace Paymaster.Model
         public virtual int? Uscitizen { get; set; }
         public virtual DateTime? Createdt { get; set; }
         public virtual int? Createby { get; set; }
-        
 
         public virtual bool IsDeleted { get; set; }
-        
     }
 }

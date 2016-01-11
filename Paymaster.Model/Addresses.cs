@@ -1,11 +1,9 @@
-using System;
-using System.Text;
-using System.Collections.Generic;
+using Paymaster.Model.Interfaces;
 
-
-namespace Paymaster.Model {
-    
-    public class Addresses {
+namespace Paymaster.Model
+{
+    public class Addresses : IIsDeletable, IIdAble<int>
+    {
         public virtual int Id { get; set; }
         public virtual Employees Employees { get; set; }
         public virtual int Type { get; set; }

@@ -11,36 +11,34 @@ using Paymaster.Model;
 
 namespace Paymaster.Controllers
 {
-    public class PayorController : ApiController
+    public class AddressController : ApiController
     {
         private ISessionFactory _sessionFactory;
-        private PayorService _payorService;
-        
-        public PayorController()
+        private AddressService _addressService;
+
+        public AddressController()
         {
             _sessionFactory = DBPlumbing.CreateSessionFactory();
-            _payorService = new PayorService(_sessionFactory);
+            _addressService = new AddressService(_sessionFactory);
         }
-
-        // GET: api/Payor
+        
         /// <summary>
-        /// List all payor
+        /// List all Address
         /// </summary>
         /// <returns></returns>
-        public IEnumerable<Payors> Get()
+        public IEnumerable<Addresses> Get()
         {
-            return _payorService.GetAll().AsEnumerable();
+            return _addressService.GetAll().AsEnumerable();
         }
-
-        // GET: api/Payor/id
+        
         /// <summary>
-        /// Get payor by payor Id
+        /// Get Address by address Id
         /// </summary>
         /// <param name="id">Id of the payor to be searched</param>
         /// <returns></returns>
         public IHttpActionResult Get(int id)
         {
-            var payor = _payorService.FindById(id);
+            var payor = _addressService.FindById(id);
             if (payor == null)
             {
                 return NotFound();
@@ -53,13 +51,13 @@ namespace Paymaster.Controllers
         /// </summary>
         /// <param name="payor">payor records to be inserted/saved</param>
         /// <returns></returns>
-        public HttpResponseMessage Post(Payors payor)
+        public HttpResponseMessage Post(Addresses address)
         {
             if (true)//TODO: replace this with validation logic ModelState.IsValid
             {
-                _payorService.Save(payor);
-                HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.Created, payor);
-                response.Headers.Location = new Uri(Url.Link("DefaultApi", new { id = payor.Id }));
+                _addressService.Save(address);
+                HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.Created, address);
+                response.Headers.Location = new Uri(Url.Link("DefaultApi", new { id = address.Id }));
                 return response;
             }
             else
@@ -67,23 +65,22 @@ namespace Paymaster.Controllers
                 return Request.CreateResponse(HttpStatusCode.BadRequest);
             }
         }
-
-        // POST: api/Payor
+        
         /// <summary>
-        /// Method to insert/save payor record
+        /// Method to insert/save Address
         /// </summary>
-        /// <param name="payor">payor records to be updated</param>
+        /// <param name="payor">address to be updated</param>
         /// <returns></returns>
-        public IHttpActionResult Put(Payors payor)
+        public IHttpActionResult Put(Addresses address)
         {
             if (true)//TODO: replace this with validation logic ModelState.IsValid
             {
-                var searchedPayor = _payorService.FindById(payor.Id);
-                if (payor == null)
+                var searchedPayor = _addressService.FindById(address.Id);
+                if (address == null)
                 {
                     return BadRequest("Cannot update payor/payor not found");
                 }
-                _payorService.Update(searchedPayor);
+                _addressService.Update(searchedPayor);
                 return Ok();
             }
             else

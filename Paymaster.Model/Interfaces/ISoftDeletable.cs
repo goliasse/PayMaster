@@ -1,6 +1,6 @@
 ﻿namespace Paymaster.Model.Interfaces
 {
-    public interface ISoftDeletable: IDeletable
+    public interface ISoftDeletable : IIsDeletable
     {
         bool IsDeleted { get; set; }
     }

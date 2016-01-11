@@ -3,6 +3,5 @@
     public interface IIdAble<T>
     {
         T Id { get; set; }
-        
     }
 }

@@ -1,11 +1,7 @@
-using System;
-using System.Text;
-using System.Collections.Generic;
-
-
-namespace Paymaster.Model {
-    
-    public class Emails {
+namespace Paymaster.Model
+{
+    public class Emails
+    {
         public virtual int Id { get; set; }
         public virtual Employees Employees { get; set; }
         public virtual int Type { get; set; }

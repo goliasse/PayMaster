@@ -1,11 +1,9 @@
 using System;
-using System.Text;
-using System.Collections.Generic;
 
-
-namespace Paymaster.Model {
-    
-    public class Timepunches {
+namespace Paymaster.Model
+{
+    public class Timepunches
+    {
         public virtual int Id { get; set; }
         public virtual Employees Employees { get; set; }
         public virtual DateTime? Indatetime { get; set; }

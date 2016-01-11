@@ -48,6 +48,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AddressService.cs" />
     <Compile Include="BaseDBService.cs" />
     <Compile Include="EmployeeService.cs" />
     <Compile Include="IDBService.cs" />

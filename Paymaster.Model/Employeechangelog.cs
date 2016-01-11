@@ -1,11 +1,9 @@
 using System;
-using System.Text;
-using System.Collections.Generic;
 
-
-namespace Paymaster.Model {
-    
-    public class Employeechangelog {
+namespace Paymaster.Model
+{
+    public class Employeechangelog
+    {
         public virtual int Id { get; set; }
         public virtual Employees Employees { get; set; }
         public virtual DateTime? Changedate { get; set; }

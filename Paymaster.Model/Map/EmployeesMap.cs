@@ -1,23 +1,13 @@
-using System;
-using System.Text;
-using System.Collections.Generic;
-using System.Linq;
 using FluentNHibernate.Conventions.Helpers;
 using FluentNHibernate.Mapping;
-using FluentNHibernate.MappingModel.Collections;
-using NHibernate.Mapping;
-using NHibernate.Mapping.ByCode.Conformist;
-using NHibernate.Mapping.ByCode;
-using Paymaster.Model;
 
-
-namespace Paymaster.Model.Maps {
-    
-    
-    public class EmployeesMap : ClassMap<Employees> {
-        
-        public EmployeesMap() {
-			Schema("paymaster_dev");
+namespace Paymaster.Model.Maps
+{
+    public class EmployeesMap : ClassMap<Employees>
+    {
+        public EmployeesMap()
+        {
+            Schema("paymaster_dev");
             DefaultLazy.Always();
 
             //this.ApplyFilter()
@@ -49,11 +39,10 @@ namespace Paymaster.Model.Maps {
             Map(x => x.Filingstatus);
             Map(x => x.State);
             Map(x => x.Uscitizen);
-            Map(x => x.Createdt).Not.Update(); //TODO: remove comment //ref: http://stackoverflow.com/a/2294058
+            Map(x => x.Createdt).Generated.Insert();
             Map(x => x.Createby);
-            References(c => c.Payors, "payorId");  
+            References(c => c.Payors, "payorId");
             //ManyToOne(x => x.Payors, map => { map.Column("payorID"); map.Cascade(Cascade.None); });
-
         }
     }
 }

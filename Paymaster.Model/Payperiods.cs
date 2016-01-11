@@ -1,11 +1,9 @@
 using System;
-using System.Text;
-using System.Collections.Generic;
 
-
-namespace Paymaster.Model {
-    
-    public class Payperiods {
+namespace Paymaster.Model
+{
+    public class Payperiods
+    {
         public virtual int Id { get; set; }
         public virtual Payors Payors { get; set; }
         public virtual int? Payfrequency { get; set; }

@@ -1,34 +1,31 @@
-﻿using System;
+﻿using NHibernate;
+using Paymaster.Model.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Linq.Expressions;
-using NHibernate;
-using NHibernate.Criterion;
-using NHibernate.Criterion.Lambda;
-using NHibernate.Dialect.Function;
-using Paymaster.Model.Interfaces;
 
 namespace Paymaster.DBServices
 {
-    public abstract class BaseDBService<T, U> : IDBService<T, U> where T : class,IIdAble<U>, IDeletable //where U : IIdAble<U>
+    public abstract class BaseDBService<T, U> : IDBService<T, U> where T : class, IIdAble<U>, IIsDeletable
     {
         protected readonly ISessionFactory _sessionFactory;
+
         public BaseDBService(ISessionFactory sessionFactory)
         {
             _sessionFactory = sessionFactory;
         }
 
         protected abstract bool CompareIds(U src, U dest);
-        
+
         public T FindById(U recordId)
         {
             using (ISession session = _sessionFactory.OpenSession())
             {
                 try
                 {
-                    
+                    //TODO: work on where with queryover on projections instead of where after List
                     //return session.QueryOver<T>().Where(t => CompareIds(t.Id, recordId)).List().FirstOrDefault();
-                    return session.QueryOver<T>().List().Where(t=> CompareIds(t.Id, recordId) ).FirstOrDefault();
+                    return session.QueryOver<T>().List().Where(t => CompareIds(t.Id, recordId)).FirstOrDefault();
                 }
                 catch (Exception ex)
                 {
@@ -112,7 +109,7 @@ namespace Paymaster.DBServices
             }
         }
 
-        public virtual bool SoftDelete(T record) 
+        public virtual bool SoftDelete(T record)
         {
             using (ISession session = _sessionFactory.OpenSession())
             {
@@ -130,7 +127,6 @@ namespace Paymaster.DBServices
                         session.Update(softDeletableRecord);
                         transaction.Commit();
                         return true;
-                       
                     }
                     catch (Exception ex)
                     {
@@ -161,7 +157,5 @@ namespace Paymaster.DBServices
                 }
             }
         }
-
-
     }
 }
