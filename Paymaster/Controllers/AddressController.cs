@@ -105,5 +105,28 @@ namespace Paymaster.Controllers
                 return BadRequest();
             }
         }
+
+        /// <summary>
+        /// Method to delete record
+        /// </summary>
+        /// <param name="id">record id</param>
+        /// <returns></returns>
+        public IHttpActionResult Delete(int id)
+        {
+            try
+            {
+                var employee = _addressService.FindById(id);
+                if (employee == null)
+                {
+                    return NotFound();
+                }
+                _addressService.Delete(employee);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+            return Ok();
+        }
     }
 }

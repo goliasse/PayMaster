@@ -596,6 +596,13 @@
             <param name="payor">payor records to be updated</param>
             <returns></returns>
         </member>
+        <member name="M:Paymaster.Controllers.PayorController.Delete(System.Int32)">
+            <summary>
+            Method to delete record
+            </summary>
+            <param name="id">record id</param>
+            <returns></returns>
+        </member>
         <member name="M:Paymaster.Controllers.PhoneController.Get">
             <summary>
             List all phone

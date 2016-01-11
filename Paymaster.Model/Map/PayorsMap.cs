@@ -11,6 +11,7 @@ namespace Paymaster.Model.Maps
             DefaultLazy.Always();
             Id(x => x.Id);//, map => map.Generator(Generators.Assigned));
             Map(x => x.Name);
+            //Map(x => x.IsDeleted).Not.Nullable();
         }
     }
 }
