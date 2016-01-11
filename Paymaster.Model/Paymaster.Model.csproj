@@ -1,0 +1,105 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{24D9AE4C-4849-462D-AF92-C0E425B75C1A}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Paymaster.Model</RootNamespace>
+    <AssemblyName>Paymaster.Model</AssemblyName>
+    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="FluentNHibernate, Version=2.0.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\FluentNHibernate.2.0.3.0\lib\net40\FluentNHibernate.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Iesi.Collections, Version=4.0.0.0, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Iesi.Collections.4.0.0.4000\lib\net40\Iesi.Collections.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="NHibernate, Version=4.0.0.4000, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
+      <HintPath>..\packages\NHibernate.4.0.0.4000\lib\net40\NHibernate.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Addresses.cs" />
+    <Compile Include="Checks.cs" />
+    <Compile Include="Earnings.cs" />
+    <Compile Include="Emails.cs" />
+    <Compile Include="Employeechangelog.cs" />
+    <Compile Include="Employeedeductions.cs" />
+    <Compile Include="Employees.cs" />
+    <Compile Include="Events\SoftDeletableLoadEventListener.cs" />
+    <Compile Include="Fedallowances.cs" />
+    <Compile Include="Fedtaxtables.cs" />
+    <Compile Include="FilingStatus.cs" />
+    <Compile Include="Interfaces\IDeletable.cs" />
+    <Compile Include="Interfaces\IIdAble.cs" />
+    <Compile Include="Interfaces\ISoftDeletable.cs" />
+    <Compile Include="Map\AddressesMap.cs" />
+    <Compile Include="Map\ChecksMap.cs" />
+    <Compile Include="Map\EarningsMap.cs" />
+    <Compile Include="Map\EmailsMap.cs" />
+    <Compile Include="Map\EmployeechangelogMap.cs" />
+    <Compile Include="Map\EmployeedeductionsMap.cs" />
+    <Compile Include="Map\EmployeesMap.cs" />
+    <Compile Include="Map\FedallowancesMap.cs" />
+    <Compile Include="Map\FedtaxtablesMap.cs" />
+    <Compile Include="Map\PayorsMap.cs" />
+    <Compile Include="Map\PayorvariablesMap.cs" />
+    <Compile Include="Map\PayperiodsMap.cs" />
+    <Compile Include="Map\PhonesMap.cs" />
+    <Compile Include="Map\TimepunchesMap.cs" />
+    <Compile Include="Map\UseraccessMap.cs" />
+    <Compile Include="Map\UsersMap.cs" />
+    <Compile Include="Payors.cs" />
+    <Compile Include="Payorvariables.cs" />
+    <Compile Include="Payperiods.cs" />
+    <Compile Include="Phones.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Timepunches.cs" />
+    <Compile Include="Useraccess.cs" />
+    <Compile Include="Users.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
