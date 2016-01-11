@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using AutoMapper;
 using NHibernate;
 using Paymaster.App_Start;
 using Paymaster.DBServices;
@@ -80,7 +81,8 @@ namespace Paymaster.Controllers
                 {
                     return BadRequest("Cannot update email/ email not found");
                 }
-                _emailService.Update(searchedRecord);
+                var toBeUpdatedRecord = Mapper.Map<Emails>(email);
+                _emailService.Update(toBeUpdatedRecord);
                 return Ok();
             }
             else

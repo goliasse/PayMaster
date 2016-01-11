@@ -19,6 +19,7 @@ namespace Paymaster.Model.Maps
             Map(x => x.State);
             Map(x => x.Zip);
             Map(x => x.Notes);
+            References(c => c.Employees, "employeeID");
             //ManyToOne(x => x.Employees, map => { map.Column("employeeID"); map.Cascade(Cascade.None); });
         }
     }

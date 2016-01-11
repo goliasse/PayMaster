@@ -4,10 +4,12 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using AutoMapper;
 using NHibernate;
 using Paymaster.App_Start;
 using Paymaster.DBServices;
 using Paymaster.Model;
+using Paymaster.Models;
 
 namespace Paymaster.Controllers
 {
@@ -15,20 +17,33 @@ namespace Paymaster.Controllers
     {
         private ISessionFactory _sessionFactory;
         private AddressService _addressService;
+        private EmployeeService _employeeService;
 
         public AddressController()
         {
             _sessionFactory = DBPlumbing.CreateSessionFactory();
             _addressService = new AddressService(_sessionFactory);
+            _employeeService = new EmployeeService(_sessionFactory);
+
+            Mapper.CreateMap<AddressDTO, Addresses>()
+               .AfterMap(
+                   (src, dest) => dest.Employees = _employeeService.FindById(src.EmployeesId)
+               );
+            Mapper.CreateMap<Addresses, AddressDTO>()
+                .AfterMap(
+                    (src, dest) => dest.EmployeesId = src.Employees.Id
+                );
+
+            Mapper.CreateMap<List<Addresses>, List<AddressDTO>>();
         }
         
         /// <summary>
         /// List all Address
         /// </summary>
         /// <returns></returns>
-        public IEnumerable<Addresses> Get()
+        public IEnumerable<AddressDTO> Get()
         {
-            return _addressService.GetAll().AsEnumerable();
+            return Mapper.Map<IEnumerable<AddressDTO>>(_addressService.GetAll().AsEnumerable());
         }
         
         /// <summary>
@@ -43,13 +58,13 @@ namespace Paymaster.Controllers
             {
                 return NotFound();
             }
-            return Ok(record);
+            return Ok(Mapper.Map<AddressDTO>(record));
         }
 
         /// <summary>
         /// Method to insert/save payor record
         /// </summary>
-        /// <param name="payor">payor records to be inserted/saved</param>
+        /// <param name="address">address records to be inserted/saved</param>
         /// <returns></returns>
         public HttpResponseMessage Post(Addresses address)
         {
@@ -69,18 +84,19 @@ namespace Paymaster.Controllers
         /// <summary>
         /// Method to insert/save Address
         /// </summary>
-        /// <param name="payor">address to be updated</param>
+        /// <param name="address">address to be updated</param>
         /// <returns></returns>
-        public IHttpActionResult Put(Addresses address)
+        public IHttpActionResult Put(AddressDTO address)
         {
             if (true)//TODO: replace this with validation logic ModelState.IsValid
             {
                 var searchedPayor = _addressService.FindById(address.Id);
                 if (address == null)
-                {
+                {   
                     return BadRequest("Cannot update payor/payor not found");
                 }
-                _addressService.Update(searchedPayor);
+                var toBeUpdatedRecord = Mapper.Map<Addresses>(address);
+                _addressService.Update(toBeUpdatedRecord);
                 return Ok();
             }
             else

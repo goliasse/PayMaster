@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using AutoMapper;
 using NHibernate;
 using Paymaster.App_Start;
 using Paymaster.DBServices;
@@ -83,7 +84,8 @@ namespace Paymaster.Controllers
                 {
                     return BadRequest("Cannot update payor/payor not found");
                 }
-                _payorService.Update(searchedPayor);
+                var toBeUpdatedRecord = Mapper.Map<Payors>(payor);
+                _payorService.Update(toBeUpdatedRecord);
                 return Ok();
             }
             else

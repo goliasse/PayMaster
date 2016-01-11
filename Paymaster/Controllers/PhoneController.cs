@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using AutoMapper;
 using NHibernate;
 using Paymaster.App_Start;
 using Paymaster.DBServices;
@@ -80,7 +81,8 @@ namespace Paymaster.Controllers
                 {
                     return BadRequest("Cannot update phone/ phone not found");
                 }
-                _phoneService.Update(searchedRecord);
+                var toBeUpdatedRecord = Mapper.Map<Phones>(phone);
+                _phoneService.Update(toBeUpdatedRecord);
                 return Ok();
             }
             else

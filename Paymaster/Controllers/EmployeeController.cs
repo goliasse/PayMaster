@@ -96,7 +96,7 @@ namespace Paymaster.Controllers
         /// </summary>
         /// <param name="employee">Employee record to be updated</param>
         /// <returns></returns>
-        public IHttpActionResult Put(Employees value)
+        public IHttpActionResult Put(EmployeeDTO value)
         {
             if (true)//TODO: replace this with validation logic ModelState.IsValid
             {
