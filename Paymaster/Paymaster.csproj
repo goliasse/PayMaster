@@ -171,10 +171,12 @@
     <Compile Include="Controllers\EmployeeController.cs" />
     <Compile Include="Controllers\PayorController.cs" />
     <Compile Include="Controllers\PhoneController.cs" />
+    <Compile Include="Controllers\SearchController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\EmployeeDTO.cs" />
+    <Compile Include="Models\SearchDTO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -623,5 +623,12 @@
             <param name="email">phone to be updated</param>
             <returns></returns>
         </member>
+        <member name="M:Paymaster.Controllers.SearchController.Post(Paymaster.Models.EmployeeSearchDTO)">
+            <summary>
+            Method to insert/save phone record
+            </summary>
+            <param name="email">phone records to be inserted/saved</param>
+            <returns></returns>
+        </member>
     </members>
 </doc>
