@@ -54,6 +54,7 @@
     <Compile Include="EmployeeService.cs" />
     <Compile Include="IDBService.cs" />
     <Compile Include="PayorService.cs" />
+    <Compile Include="PhoneService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
