@@ -64,15 +64,16 @@ namespace Paymaster.Controllers
         /// <summary>
         /// Method to insert/save payor record
         /// </summary>
-        /// <param name="address">address records to be inserted/saved</param>
+        /// <param name="addressDto">address records to be inserted/saved</param>
         /// <returns></returns>
-        public HttpResponseMessage Post(Addresses address)
+        public HttpResponseMessage Post(AddressDTO addressDto)
         {
             if (true)//TODO: replace this with validation logic ModelState.IsValid
             {
-                _addressService.Save(address);
-                HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.Created, address);
-                response.Headers.Location = new Uri(Url.Link("DefaultApi", new { id = address.Id }));
+                  var record = Mapper.Map<Addresses>(addressDto);
+                _addressService.Save(record);
+                HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.Created, addressDto);
+                response.Headers.Location = new Uri(Url.Link("DefaultApi", new { id = addressDto.Id }));
                 return response;
             }
             else

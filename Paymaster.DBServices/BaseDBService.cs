@@ -28,7 +28,7 @@ namespace Paymaster.DBServices
                     return session.QueryOver<T>().List().Where(t => CompareIds(t.Id, recordId)).FirstOrDefault();
                 }
                 catch (Exception ex)
-                {
+                {                                                 
                     throw ex;
                 }
             }
