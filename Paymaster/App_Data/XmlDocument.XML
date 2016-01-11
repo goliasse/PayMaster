@@ -508,6 +508,33 @@
             <param name="payor">address to be updated</param>
             <returns></returns>
         </member>
+        <member name="M:Paymaster.Controllers.EmailController.Get">
+            <summary>
+            List all Emails
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Paymaster.Controllers.EmailController.Get(System.Int32)">
+            <summary>
+            Get Email by email record Id
+            </summary>
+            <param name="id">Id of the email to be searched</param>
+            <returns></returns>
+        </member>
+        <member name="M:Paymaster.Controllers.EmailController.Post(Paymaster.Model.Emails)">
+            <summary>
+            Method to insert/save email record
+            </summary>
+            <param name="email">email records to be inserted/saved</param>
+            <returns></returns>
+        </member>
+        <member name="M:Paymaster.Controllers.EmailController.Put(Paymaster.Model.Emails)">
+            <summary>
+            Method to update Email
+            </summary>
+            <param name="email">email to be updated</param>
+            <returns></returns>
+        </member>
         <member name="M:Paymaster.Controllers.EmployeeController.Get">
             <summary>
             List all employees
@@ -535,6 +562,13 @@
             <param name="employee">Employee record to be updated</param>
             <returns></returns>
         </member>
+        <member name="M:Paymaster.Controllers.EmployeeController.Delete(System.Int32)">
+            <summary>
+            Method to delete record
+            </summary>
+            <param name="id">Employee id</param>
+            <returns></returns>
+        </member>
         <member name="M:Paymaster.Controllers.PayorController.Get">
             <summary>
             List all payor
@@ -560,6 +594,33 @@
             Method to insert/save payor record
             </summary>
             <param name="payor">payor records to be updated</param>
+            <returns></returns>
+        </member>
+        <member name="M:Paymaster.Controllers.PhoneController.Get">
+            <summary>
+            List all phone
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Paymaster.Controllers.PhoneController.Get(System.Int32)">
+            <summary>
+            Get Email by phone record Id
+            </summary>
+            <param name="id">Id of the phone to be searched</param>
+            <returns></returns>
+        </member>
+        <member name="M:Paymaster.Controllers.PhoneController.Post(Paymaster.Model.Phones)">
+            <summary>
+            Method to insert/save phone record
+            </summary>
+            <param name="email">phone records to be inserted/saved</param>
+            <returns></returns>
+        </member>
+        <member name="M:Paymaster.Controllers.PhoneController.Put(Paymaster.Model.Phones)">
+            <summary>
+            Method to update phone
+            </summary>
+            <param name="email">phone to be updated</param>
             <returns></returns>
         </member>
     </members>
