@@ -1,6 +1,8 @@
+using Paymaster.Model.Interfaces;
+
 namespace Paymaster.Model
 {
-    public class Emails
+    public class Emails : IIdAble<int>, IIsDeletable
     {
         public virtual int Id { get; set; }
         public virtual Employees Employees { get; set; }

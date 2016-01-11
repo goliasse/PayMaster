@@ -11,34 +11,34 @@ using Paymaster.Model;
 
 namespace Paymaster.Controllers
 {
-    public class AddressController : ApiController
+    public class EmailController : ApiController
     {
         private ISessionFactory _sessionFactory;
-        private AddressService _addressService;
+        private EmailService _emailService;
 
-        public AddressController()
+        public EmailController()
         {
             _sessionFactory = DBPlumbing.CreateSessionFactory();
-            _addressService = new AddressService(_sessionFactory);
+            _emailService = new EmailService(_sessionFactory);
         }
-        
+
         /// <summary>
-        /// List all Address
+        /// List all Emails
         /// </summary>
         /// <returns></returns>
-        public IEnumerable<Addresses> Get()
+        public IEnumerable<Emails> Get()
         {
-            return _addressService.GetAll().AsEnumerable();
+            return _emailService.GetAll().AsEnumerable();
         }
-        
+
         /// <summary>
-        /// Get Address by address Id
+        /// Get Email by email record Id
         /// </summary>
-        /// <param name="id">Id of the payor to be searched</param>
+        /// <param name="id">Id of the email to be searched</param>
         /// <returns></returns>
         public IHttpActionResult Get(int id)
         {
-            var record = _addressService.FindById(id);
+            var record = _emailService.FindById(id);
             if (record == null)
             {
                 return NotFound();
@@ -47,17 +47,17 @@ namespace Paymaster.Controllers
         }
 
         /// <summary>
-        /// Method to insert/save payor record
+        /// Method to insert/save email record
         /// </summary>
-        /// <param name="payor">payor records to be inserted/saved</param>
+        /// <param name="email">email records to be inserted/saved</param>
         /// <returns></returns>
-        public HttpResponseMessage Post(Addresses address)
+        public HttpResponseMessage Post(Emails email)
         {
             if (true)//TODO: replace this with validation logic ModelState.IsValid
             {
-                _addressService.Save(address);
-                HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.Created, address);
-                response.Headers.Location = new Uri(Url.Link("DefaultApi", new { id = address.Id }));
+                _emailService.Save(email);
+                HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.Created, email);
+                response.Headers.Location = new Uri(Url.Link("DefaultApi", new { id = email.Id }));
                 return response;
             }
             else
@@ -65,22 +65,22 @@ namespace Paymaster.Controllers
                 return Request.CreateResponse(HttpStatusCode.BadRequest);
             }
         }
-        
+
         /// <summary>
-        /// Method to insert/save Address
+        /// Method to update Email
         /// </summary>
-        /// <param name="payor">address to be updated</param>
+        /// <param name="email">email to be updated</param>
         /// <returns></returns>
-        public IHttpActionResult Put(Addresses address)
+        public IHttpActionResult Put(Emails email)
         {
             if (true)//TODO: replace this with validation logic ModelState.IsValid
             {
-                var searchedPayor = _addressService.FindById(address.Id);
-                if (address == null)
+                var searchedRecord = _emailService.FindById(email.Id);
+                if (email == null)
                 {
-                    return BadRequest("Cannot update payor/payor not found");
+                    return BadRequest("Cannot update email/ email not found");
                 }
-                _addressService.Update(searchedPayor);
+                _emailService.Update(searchedRecord);
                 return Ok();
             }
             else

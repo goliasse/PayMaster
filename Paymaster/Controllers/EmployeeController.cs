@@ -90,13 +90,7 @@ namespace Paymaster.Controllers
                 return Request.CreateResponse(HttpStatusCode.BadRequest);
             }
         }
-
-        //// PUT: api/Employee/5
-        //public void Put(int id, [FromBody]string value)
-        //{
-        //}
-
-        // PUT: api/Employee/5
+        
         /// <summary>
         /// Method to update employee
         /// </summary>
@@ -120,7 +114,11 @@ namespace Paymaster.Controllers
             }
         }
 
-        // DELETE: api/Employee/5
+        /// <summary>
+        /// Method to delete record
+        /// </summary>
+        /// <param name="id">Employee id</param>
+        /// <returns></returns>
         public IHttpActionResult Delete(int id)
         {
             try
