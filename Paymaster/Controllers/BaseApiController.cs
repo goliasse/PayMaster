@@ -2,6 +2,7 @@
 
 namespace Paymaster.Controllers
 {
+    [Authorize]
     public class BaseApiController : ApiController
     {
         
