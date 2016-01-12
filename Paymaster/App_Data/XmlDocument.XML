@@ -508,6 +508,13 @@
             <param name="address">address to be updated</param>
             <returns></returns>
         </member>
+        <member name="M:Paymaster.Controllers.AddressController.Delete(System.Int32)">
+            <summary>
+            Method to delete record
+            </summary>
+            <param name="id">record id</param>
+            <returns></returns>
+        </member>
         <member name="M:Paymaster.Controllers.EmailController.Get">
             <summary>
             List all Emails
@@ -533,6 +540,13 @@
             Method to update Email
             </summary>
             <param name="email">email to be updated</param>
+            <returns></returns>
+        </member>
+        <member name="M:Paymaster.Controllers.EmailController.Delete(System.Int32)">
+            <summary>
+            Method to delete record
+            </summary>
+            <param name="id">record id</param>
             <returns></returns>
         </member>
         <member name="M:Paymaster.Controllers.EmployeeController.Get">
@@ -628,6 +642,13 @@
             Method to update phone
             </summary>
             <param name="email">phone to be updated</param>
+            <returns></returns>
+        </member>
+        <member name="M:Paymaster.Controllers.PhoneController.Delete(System.Int32)">
+            <summary>
+            Method to delete record
+            </summary>
+            <param name="id">record id</param>
             <returns></returns>
         </member>
         <member name="M:Paymaster.Controllers.SearchController.Post(Paymaster.Models.EmployeeSearchDTO)">

@@ -12,7 +12,7 @@ using Paymaster.Model;
 
 namespace Paymaster.Controllers
 {
-    public class EmailController : ApiController
+    public class EmailController : BaseApiController
     {
         private ISessionFactory _sessionFactory;
         private EmailService _emailService;

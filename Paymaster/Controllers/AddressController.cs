@@ -13,7 +13,8 @@ using Paymaster.Models;
 
 namespace Paymaster.Controllers
 {
-    public class AddressController : ApiController
+
+    public class AddressController : BaseApiController
     {
         private ISessionFactory _sessionFactory;
         private AddressService _addressService;

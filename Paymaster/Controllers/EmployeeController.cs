@@ -13,7 +13,7 @@ using Paymaster.Models;
 
 namespace Paymaster.Controllers
 {
-    public class EmployeeController : ApiController
+    public class EmployeeController : BaseApiController
     {
         private ISessionFactory _sessionFactory;
         private EmployeeService _employeeService;

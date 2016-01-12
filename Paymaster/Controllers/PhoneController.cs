@@ -12,7 +12,7 @@ using Paymaster.Model;
 
 namespace Paymaster.Controllers
 {
-    public class PhoneController : ApiController
+    public class PhoneController : BaseApiController
     {
         private ISessionFactory _sessionFactory;
         private PhoneService _phoneService;
