@@ -7,8 +7,6 @@ namespace Paymaster.Model.Maps
     {
         public FedtaxtablesMap()
         {
-            Schema("paymaster_dev");
-            Table("fedtaxtables");
             DefaultLazy.Always();
             Id(x => x.Id);//, map => map.Generator(Generators.Assigned));
             Map(x => x.Year).Not.Nullable();//, map => map.NotNullable(true));

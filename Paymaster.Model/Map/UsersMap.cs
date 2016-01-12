@@ -7,8 +7,6 @@ namespace Paymaster.Model.Maps
     {
         public UsersMap()
         {
-            Schema("paymaster_dev");
-            Table("users");
             DefaultLazy.Always();
             Id(x => x.Id);//, map => map.Generator(Generators.Assigned));
             Map(x => x.Username).Not.Nullable();//, map => map.NotNullable(true));

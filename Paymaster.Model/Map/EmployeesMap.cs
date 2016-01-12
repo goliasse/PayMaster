@@ -7,8 +7,6 @@ namespace Paymaster.Model.Maps
     {
         public EmployeesMap()
         {
-            Schema("paymaster_dev");
-            Table("employees");
             DefaultLazy.Always();
 
             //this.ApplyFilter()

@@ -7,8 +7,6 @@ namespace Paymaster.Model.Maps
     {
         public EmailsMap()
         {
-            Schema("paymaster_dev");
-            Table("emails");
             DefaultLazy.Always();
             Id(x => x.Id);//, map => map.Generator(Generators.Assigned));
             Map(x => x.Type).Not.Nullable(); ;//, map => map.NotNullable(true));

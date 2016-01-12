@@ -7,8 +7,6 @@ namespace Paymaster.Model.Maps
     {
         public ChecksMap()
         {
-            Schema("paymaster_dev");
-            Table("checks");
             DefaultLazy.Always();
             Id(x => x.Id);//, map => map.Generator(Generators.Assigned));
             Map(x => x.Employeeid);
