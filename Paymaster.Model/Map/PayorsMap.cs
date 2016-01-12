@@ -8,6 +8,7 @@ namespace Paymaster.Model.Maps
         public PayorsMap()
         {
             Schema("paymaster_dev");
+            Table("payors"); 
             DefaultLazy.Always();
             Id(x => x.Id);//, map => map.Generator(Generators.Assigned));
             Map(x => x.Name);

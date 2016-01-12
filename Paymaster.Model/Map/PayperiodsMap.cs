@@ -8,6 +8,7 @@ namespace Paymaster.Model.Maps
         public PayperiodsMap()
         {
             Schema("paymaster_dev");
+            Table("payperiods");
             DefaultLazy.Always();
             Id(x => x.Id);//, map => map.Generator(Generators.Assigned));
             Map(x => x.Payfrequency);

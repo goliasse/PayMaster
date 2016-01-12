@@ -8,6 +8,7 @@ namespace Paymaster.Model.Maps
         public UseraccessMap()
         {
             Schema("paymaster_dev");
+            Table("useraccess");
             DefaultLazy.Always();
             Id(x => x.Id);//, map => map.Generator(Generators.Assigned));
             Map(x => x.Userid);

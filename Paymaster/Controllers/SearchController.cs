@@ -42,8 +42,7 @@ namespace Paymaster.Controllers
                 var allEmployee = _employeeService.GetAll();
                 if (allEmployee.Any())
                 {
-                    var list = allEmployee.Where(t => t.IsDeleted == false
-                                                      &&(
+                    var list = allEmployee.Where(t => (
                                                       Compare(t.Firstname, searchDto.Firstname)
                                                       || Compare(t.Middlename, searchDto.Middlename)
                                                       || Compare(t.Lastname, searchDto.Lastname)
@@ -58,7 +57,7 @@ namespace Paymaster.Controllers
         private bool Compare(string toMatchIn, string toMatch)
         {
             if (!string.IsNullOrWhiteSpace(toMatchIn) && !string.IsNullOrWhiteSpace(toMatch))
-                return toMatchIn.ToLower().Contains(toMatch.ToLower());
+                return toMatchIn.ToLower().Trim().Contains(toMatch.ToLower().Trim());
             return false;
         }
     }

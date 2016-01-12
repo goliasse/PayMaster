@@ -105,7 +105,8 @@ namespace Paymaster.Controllers
                 {
                     return BadRequest("Cannot update employee not found");
                 }
-                _employeeService.Update(searchedEmployee);
+                var toBeUpdatedRecord = Mapper.Map<Employees>(value);
+                _employeeService.Update(toBeUpdatedRecord);
                 return Ok();
             }
             else
@@ -129,6 +130,7 @@ namespace Paymaster.Controllers
                     return NotFound();
                 }
                 _employeeService.SoftDelete(employee);
+                //_employeeService.Delete(employee);
             }
             catch (Exception ex)
             {

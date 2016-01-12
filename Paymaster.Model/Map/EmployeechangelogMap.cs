@@ -8,6 +8,7 @@ namespace Paymaster.Model.Maps
         public EmployeechangelogMap()
         {
             Schema("paymaster_dev");
+            Table("employeechangelog");
             DefaultLazy.Always();
             Id(x => x.Id);//, map => map.Generator(Generators.Assigned));
             Map(x => x.Changedate);

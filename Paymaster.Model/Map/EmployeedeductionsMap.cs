@@ -8,6 +8,7 @@ namespace Paymaster.Model.Maps
         public EmployeedeductionsMap()
         {
             Schema("paymaster_dev");
+            Table("employeedeductions");
             DefaultLazy.Always();
             Id(x => x.Id);//, map => map.Generator(Generators.Assigned));
             Map(x => x.Description);

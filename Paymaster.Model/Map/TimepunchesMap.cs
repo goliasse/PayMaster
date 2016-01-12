@@ -9,6 +9,7 @@ namespace Paymaster.Model.Maps
         {
             //Table("Timepunches");
             Schema("paymaster_dev");
+            Table("timepunches");
             DefaultLazy.Always();
             Id(x => x.Id);//, map => map.Generator(Generators.Assigned));
             Map(x => x.Indatetime);
