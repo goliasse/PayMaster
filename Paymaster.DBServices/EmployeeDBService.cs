@@ -4,9 +4,9 @@ using Paymaster.Model;
 
 namespace Paymaster.DBServices
 {
-    public class EmployeeService : BaseDBService<Employees, int>
+    public class EmployeeDBService : BaseDBService<Employees, int>
     {
-        public EmployeeService(ISessionFactory sessionFactory) : base(sessionFactory)
+        public EmployeeDBService(ISessionFactory sessionFactory) : base(sessionFactory)
         {
         }
 

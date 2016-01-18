@@ -15,12 +15,12 @@ namespace Paymaster.Controllers
     public class PayorController : BaseApiController
     {
         private ISessionFactory _sessionFactory;
-        private PayorService _payorService;
+        private PayorDBService _payorService;
         
         public PayorController()
         {
             _sessionFactory = DBPlumbing.CreateSessionFactory();
-            _payorService = new PayorService(_sessionFactory);
+            _payorService = new PayorDBService(_sessionFactory);
         }
 
         // GET: api/Payor

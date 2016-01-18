@@ -3,9 +3,9 @@ using Paymaster.Model;
 
 namespace Paymaster.DBServices
 {
-    public class PhoneService : BaseDBService<Phones, int>
+    public class EmailDBService : BaseDBService<Emails, int>
     {
-        public PhoneService(ISessionFactory sessionFactory) : base(sessionFactory)
+        public EmailDBService(ISessionFactory sessionFactory) : base(sessionFactory)
         {
         }
 

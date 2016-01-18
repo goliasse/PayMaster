@@ -16,15 +16,15 @@ namespace Paymaster.Controllers
     public class EmployeeController : BaseApiController
     {
         private ISessionFactory _sessionFactory;
-        private EmployeeService _employeeService;
+        private EmployeeDBService _employeeService;
 
-        private PayorService _payorService;
+        private PayorDBService _payorService;
 
         public EmployeeController()
         {
             _sessionFactory = DBPlumbing.CreateSessionFactory();
-            _employeeService = new EmployeeService(_sessionFactory);
-            _payorService = new PayorService(_sessionFactory);
+            _employeeService = new EmployeeDBService(_sessionFactory);
+            _payorService = new PayorDBService(_sessionFactory);
             //Mapper.CreateMap<Employees, EmployeeDTO>();
             Mapper.CreateMap<EmployeeDTO, Employees>()
                 .AfterMap(

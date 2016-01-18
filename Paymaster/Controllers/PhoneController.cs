@@ -15,12 +15,12 @@ namespace Paymaster.Controllers
     public class PhoneController : BaseApiController
     {
         private ISessionFactory _sessionFactory;
-        private PhoneService _phoneService;
+        private PhoneDBService _phoneService;
 
         public PhoneController()
         {
             _sessionFactory = DBPlumbing.CreateSessionFactory();
-            _phoneService = new PhoneService(_sessionFactory);
+            _phoneService = new PhoneDBService(_sessionFactory);
         }
 
         /// <summary>

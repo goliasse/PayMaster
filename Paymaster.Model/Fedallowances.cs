@@ -1,6 +1,8 @@
+using Paymaster.Model.Interfaces;
+
 namespace Paymaster.Model
 {
-    public class Fedallowances
+    public class Fedallowances : IIdAble<int>, IIsDeletable
     {
         public virtual int Id { get; set; }
         public virtual int Year { get; set; }

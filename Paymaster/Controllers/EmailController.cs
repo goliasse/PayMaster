@@ -15,12 +15,12 @@ namespace Paymaster.Controllers
     public class EmailController : BaseApiController
     {
         private ISessionFactory _sessionFactory;
-        private EmailService _emailService;
+        private EmailDBService _emailService;
 
         public EmailController()
         {
             _sessionFactory = DBPlumbing.CreateSessionFactory();
-            _emailService = new EmailService(_sessionFactory);
+            _emailService = new EmailDBService(_sessionFactory);
         }
 
         /// <summary>

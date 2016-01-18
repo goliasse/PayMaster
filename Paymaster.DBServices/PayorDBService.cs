@@ -3,11 +3,11 @@ using Paymaster.Model;
 
 namespace Paymaster.DBServices
 {
-    public class PayorService : BaseDBService<Payors, int>
+    public class PayorDBService : BaseDBService<Payors, int>
     {
         private readonly ISessionFactory _sessionFactory;
 
-        public PayorService(ISessionFactory sessionFactory) : base(sessionFactory)
+        public PayorDBService(ISessionFactory sessionFactory) : base(sessionFactory)
         {
         }
 

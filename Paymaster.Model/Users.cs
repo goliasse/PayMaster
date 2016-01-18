@@ -1,8 +1,9 @@
 using System;
+using Paymaster.Model.Interfaces;
 
 namespace Paymaster.Model
 {
-    public class Users
+    public class Users : IIdAble<int>, IIsDeletable
     {
         public virtual int Id { get; set; }
         public virtual Payors Payors { get; set; }

@@ -1,6 +1,8 @@
+using Paymaster.Model.Interfaces;
+
 namespace Paymaster.Model
 {
-    public class Payorvariables
+    public class Payorvariables : IIdAble<int>, IIsDeletable
     {
         public virtual int Id { get; set; }
         public virtual Payors Payors { get; set; }
