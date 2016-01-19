@@ -63,7 +63,7 @@
     <Compile Include="PayPeriodDBService.cs" />
     <Compile Include="PhoneDBService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="TimepuncheDBService.cs" />
+    <Compile Include="TimepunchDBService.cs" />
     <Compile Include="UserAccessDBService.cs" />
     <Compile Include="UserDBService.cs" />
   </ItemGroup>

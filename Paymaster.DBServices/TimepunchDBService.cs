@@ -3,9 +3,9 @@ using Paymaster.Model;
 
 namespace Paymaster.DBServices
 {
-    public class TimepuncheDBService : BaseDBService<Timepunches, int>
+    public class TimepunchDBService : BaseDBService<Timepunches, int>
     {
-        public TimepuncheDBService(ISessionFactory sessionFactory) : base(sessionFactory)
+        public TimepunchDBService(ISessionFactory sessionFactory) : base(sessionFactory)
         {
         }
 
