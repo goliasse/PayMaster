@@ -1,16 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-
-namespace Paymaster.Models
+﻿namespace Paymaster.Models
 {
     public abstract class SearchDTO
     {
-
     }
 
-    public class EmployeeSearchDTO:SearchDTO
+    public class EmployeeSearchDTO : SearchDTO
     {
         public string Socsec { get; set; }
         public string Firstname { get; set; }

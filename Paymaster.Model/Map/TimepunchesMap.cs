@@ -13,6 +13,8 @@ namespace Paymaster.Model.Maps
             Map(x => x.Outdatetime);
             Map(x => x.Referencedate);
             Map(x => x.Hours);
+            Map(x => x.Hourlypayrate);
+            Map(x => x.Dailyrate);
             Map(x => x.Processed);
 
             //TODO

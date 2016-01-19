@@ -16,7 +16,7 @@ namespace Paymaster.Model
         public virtual string Lastname { get; set; }
         public virtual string Middlename { get; set; }
         public virtual int? Payfrequency { get; set; }
-        public virtual string Hourlypayrate { get; set; }
+        public virtual decimal Hourlypayrate { get; set; }
         public virtual int? Dailyrate { get; set; }
         public virtual DateTime? Hiredate { get; set; }
         public virtual int? Earnedincomecredit { get; set; }

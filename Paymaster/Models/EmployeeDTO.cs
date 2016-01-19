@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 
 namespace Paymaster.Models
 {
@@ -10,13 +7,15 @@ namespace Paymaster.Models
         public virtual int Id { get; set; }
         public virtual int PayorId { get; set; }
         public virtual int? Number { get; set; }
+
         //public virtual bool Active { get; set; }
         public virtual string Socsec { get; set; }
+
         public virtual string Firstname { get; set; }
         public virtual string Lastname { get; set; }
         public virtual string Middlename { get; set; }
         public virtual int? Payfrequency { get; set; }
-        public virtual string Hourlypayrate { get; set; }
+        public virtual decimal Hourlypayrate { get; set; }
         public virtual int? Dailyrate { get; set; }
         public virtual DateTime? Hiredate { get; set; }
         public virtual int? Earnedincomecredit { get; set; }
