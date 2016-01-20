@@ -559,7 +559,7 @@
             <summary>
             Get employee by employee Id
             </summary>
-            <param name="id">Id of the employee to be searched: Guid/UUID</param>
+            <param name="id">Id of the employee to be searched</param>
             <returns></returns>
         </member>
         <member name="M:Paymaster.Controllers.EmployeeController.Post(Paymaster.Models.EmployeeDTO)">
@@ -656,6 +656,46 @@
             Method to insert/save phone record
             </summary>
             <param name="email">phone records to be inserted/saved</param>
+            <returns></returns>
+        </member>
+        <member name="M:Paymaster.Controllers.TimepunchController.Get">
+            <summary>
+            List all Address
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Paymaster.Controllers.UserController.Get">
+            <summary>
+            List all Users
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Paymaster.Controllers.UserController.Get(System.Int32)">
+            <summary>
+            Get Users by User's Id
+            </summary>
+            <param name="id">Id of the user to be searched</param>
+            <returns></returns>
+        </member>
+        <member name="M:Paymaster.Controllers.UserController.Post(Paymaster.Models.UserInputDTO)">
+            <summary>
+            Method to insert/save User record
+            </summary>
+            <param name="user">User records to be inserted/saved</param>
+            <returns></returns>
+        </member>
+        <member name="M:Paymaster.Controllers.UserController.Put(Paymaster.Models.UserInputDTO)">
+            <summary>
+            Method to update user
+            </summary>
+            <param name="user">Users record to be updated</param>
+            <returns></returns>
+        </member>
+        <member name="M:Paymaster.Controllers.UserController.Delete(System.Int32)">
+            <summary>
+            Method to delete record
+            </summary>
+            <param name="id">Employee id</param>
             <returns></returns>
         </member>
     </members>

@@ -55,7 +55,7 @@ namespace Paymaster.Controllers
         /// <summary>
         /// Get employee by employee Id
         /// </summary>
-        /// <param name="id">Id of the employee to be searched: Guid/UUID</param>
+        /// <param name="id">Id of the employee to be searched</param>
         /// <returns></returns>
         public IHttpActionResult Get(int id)
         {
@@ -103,7 +103,7 @@ namespace Paymaster.Controllers
                 var searchedEmployee = _employeeService.FindById(value.Id);
                 if (value == null)
                 {
-                    return BadRequest("Cannot update employee not found");
+                    return BadRequest("Cannot update employee/Employee not found");
                 }
                 var toBeUpdatedRecord = Mapper.Map<Employees>(value);
                 _employeeService.Update(toBeUpdatedRecord);

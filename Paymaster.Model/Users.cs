@@ -9,7 +9,7 @@ namespace Paymaster.Model
         public virtual Payors Payors { get; set; }
         public virtual string Username { get; set; }
         public virtual string Password { get; set; }
-        public virtual int? Locked { get; set; }
+        public virtual bool Locked { get; set; }
         public virtual string Sessionid { get; set; }
         public virtual DateTime? Sessionstart { get; set; }
         public virtual DateTime? Sessionend { get; set; }
