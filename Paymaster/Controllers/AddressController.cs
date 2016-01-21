@@ -17,14 +17,14 @@ namespace Paymaster.Controllers
     public class AddressController : BaseApiController
     {
         private ISessionFactory _sessionFactory;
-        private AddressDBService _addressService;
-        private EmployeeDBService _employeeService;
+        private AddressService _addressService;
+        private EmployeeService _employeeService;
 
         public AddressController()
         {
             _sessionFactory = DBPlumbing.CreateSessionFactory();
-            _addressService = new AddressDBService(_sessionFactory);
-            _employeeService = new EmployeeDBService(_sessionFactory);
+            _addressService = new AddressService(_sessionFactory);
+            _employeeService = new EmployeeService(_sessionFactory);
 
             Mapper.CreateMap<AddressDTO, Addresses>()
                .AfterMap(

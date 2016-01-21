@@ -30,16 +30,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="FluentNHibernate, Version=2.0.3.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\FluentNHibernate.2.0.3.0\lib\net40\FluentNHibernate.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="Iesi.Collections, Version=4.0.0.0, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
       <HintPath>..\packages\Iesi.Collections.4.0.0.4000\lib\net40\Iesi.Collections.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="NHibernate, Version=4.0.0.4000, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
-      <HintPath>..\packages\NHibernate.4.0.0.4000\lib\net40\NHibernate.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
@@ -66,22 +58,6 @@
     <Compile Include="Interfaces\IIsDeletable.cs" />
     <Compile Include="Interfaces\IIdAble.cs" />
     <Compile Include="Interfaces\ISoftDeletable.cs" />
-    <Compile Include="Map\AddressesMap.cs" />
-    <Compile Include="Map\ChecksMap.cs" />
-    <Compile Include="Map\EarningsMap.cs" />
-    <Compile Include="Map\EmailsMap.cs" />
-    <Compile Include="Map\EmployeechangelogMap.cs" />
-    <Compile Include="Map\EmployeedeductionsMap.cs" />
-    <Compile Include="Map\EmployeesMap.cs" />
-    <Compile Include="Map\FedallowancesMap.cs" />
-    <Compile Include="Map\FedtaxtablesMap.cs" />
-    <Compile Include="Map\PayorsMap.cs" />
-    <Compile Include="Map\PayorvariablesMap.cs" />
-    <Compile Include="Map\PayperiodsMap.cs" />
-    <Compile Include="Map\PhonesMap.cs" />
-    <Compile Include="Map\TimepunchesMap.cs" />
-    <Compile Include="Map\UseraccessMap.cs" />
-    <Compile Include="Map\UsersMap.cs" />
     <Compile Include="Payors.cs" />
     <Compile Include="Payorvariables.cs" />
     <Compile Include="Payperiods.cs" />
@@ -97,6 +73,7 @@
   <ItemGroup>
     <Content Include="MigrationScript.sql" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

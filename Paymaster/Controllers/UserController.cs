@@ -16,15 +16,15 @@ namespace Paymaster.Controllers
     public class UserController : BaseApiController
     {
         private ISessionFactory _sessionFactory;
-        private PayorDBService _payorService;
-        private UserDBService _userService;
+        private PayorService _payorService;
+        private UserService _userService;
 
 
         public UserController()
         {
             _sessionFactory = DBPlumbing.CreateSessionFactory();
-            _payorService = new PayorDBService(_sessionFactory);
-            _userService = new UserDBService(_sessionFactory);
+            _payorService = new PayorService(_sessionFactory);
+            _userService = new UserService(_sessionFactory);
 
             Mapper.CreateMap<UserDTO, Users>()
                .AfterMap(

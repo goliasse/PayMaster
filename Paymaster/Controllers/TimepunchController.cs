@@ -10,12 +10,12 @@ namespace Paymaster.Controllers
     public class TimepunchController : BaseApiController
     {
         private ISessionFactory _sessionFactory;
-        private TimepunchDBService _timepunchService;
+        private TimepunchService _timepunchService;
 
         public TimepunchController()
         {
             _sessionFactory = DBPlumbing.CreateSessionFactory();
-            _timepunchService = new TimepunchDBService(_sessionFactory);
+            _timepunchService = new TimepunchService(_sessionFactory);
         }
 
         /// <summary>

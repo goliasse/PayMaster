@@ -16,12 +16,12 @@ namespace Paymaster.Controllers
     public class SearchController : BaseApiController
     {
         private ISessionFactory _sessionFactory;
-        private EmployeeDBService _employeeService;
+        private EmployeeService _employeeService;
 
         public SearchController()
         {
             _sessionFactory = DBPlumbing.CreateSessionFactory();
-            _employeeService = new EmployeeDBService(_sessionFactory);
+            _employeeService = new EmployeeService(_sessionFactory);
 
             Mapper.CreateMap<Employees, EmployeeDTO>()
                 .AfterMap(

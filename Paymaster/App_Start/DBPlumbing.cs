@@ -1,5 +1,4 @@
-﻿using System;
-using FluentNHibernate.Cfg;
+﻿using FluentNHibernate.Cfg;
 using FluentNHibernate.Cfg.Db;
 using FluentNHibernate.Conventions.Helpers;
 using NHibernate;
@@ -47,6 +46,7 @@ namespace Paymaster.App_Start
             return false;
         }
     }
+
     public class PaymasterPreUpdateEventListener : IPreUpdateEventListener
     {
         public bool OnPreUpdate(PreUpdateEvent @event)
