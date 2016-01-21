@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace PayMaster.DataAccess
 {
-    public class Repository<T> : NHibernateContext, IIntKeyedRepository<T> where T : class
+    public abstract class Repository<T> : NHibernateContext, IIntKeyedRepository<T> where T : class
     {
         private readonly ISession _session;
 
@@ -16,13 +16,13 @@ namespace PayMaster.DataAccess
 
         #region IRepository<T> Members
 
-        public bool Add(T entity)
+        public virtual bool Add(T entity)
         {
             _session.Save(entity);
             return true;
         }
 
-        public bool Add(System.Collections.Generic.IEnumerable<T> items)
+        public virtual bool Add(System.Collections.Generic.IEnumerable<T> items)
         {
             foreach (T item in items)
             {
@@ -31,19 +31,19 @@ namespace PayMaster.DataAccess
             return true;
         }
 
-        public bool Update(T entity)
+        public virtual bool Update(T entity)
         {
             _session.Update(entity);
             return true;
         }
 
-        public bool Delete(T entity)
+        public virtual bool Delete(T entity)
         {
             _session.Delete(entity);
             return true;
         }
 
-        public bool Delete(System.Collections.Generic.IEnumerable<T> entities)
+        public virtual bool Delete(System.Collections.Generic.IEnumerable<T> entities)
         {
             foreach (T entity in entities)
             {
@@ -56,7 +56,7 @@ namespace PayMaster.DataAccess
 
         #region IIntKeyedRepository<T> Members
 
-        public T FindBy(int id)
+        public virtual T FindBy(int id)
         {
             return _session.Get<T>(id);
         }
@@ -65,17 +65,17 @@ namespace PayMaster.DataAccess
 
         #region IReadOnlyRepository<T> Members
 
-        public IQueryable<T> All()
+        public virtual IQueryable<T> All()
         {
             return _session.Linq<T>();
         }
 
-        public T FindBy(System.Linq.Expressions.Expression<System.Func<T, bool>> expression)
+        public virtual T FindBy(System.Linq.Expressions.Expression<System.Func<T, bool>> expression)
         {
             return FilterBy(expression).Single();
         }
 
-        public IQueryable<T> FilterBy(System.Linq.Expressions.Expression<System.Func<T, bool>> expression)
+        public virtual IQueryable<T> FilterBy(System.Linq.Expressions.Expression<System.Func<T, bool>> expression)
         {
             return All().Where(expression).AsQueryable();
         }
