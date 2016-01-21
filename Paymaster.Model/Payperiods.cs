@@ -1,7 +1,7 @@
-using System;
 using Paymaster.Model.Interfaces;
+using System;
 
-namespace Paymaster.Model
+namespace Paymaster.DataModel
 {
     public class Payperiods : IIdAble<int>, IIsDeletable
     {

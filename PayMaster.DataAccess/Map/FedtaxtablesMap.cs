@@ -1,6 +1,6 @@
 using FluentNHibernate.Conventions.Helpers;
 using FluentNHibernate.Mapping;
-using Paymaster.Model;
+using Paymaster.DataModel;
 
 namespace PayMaster.DataAccess.Map
 {

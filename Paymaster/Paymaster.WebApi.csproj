@@ -73,18 +73,23 @@
       <HintPath>..\packages\NHibernate.4.0.0.4000\lib\net40\NHibernate.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="NHibernate.Linq, Version=1.1.0.1001, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\NHibernate.Linq.1.0\lib\NHibernate.Linq.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Ninject, Version=3.2.0.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
       <HintPath>..\packages\Ninject.3.2.0.0\lib\net45-full\Ninject.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Ninject.Web.Common, Version=3.2.0.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
-      <HintPath>..\packages\Ninject.Web.Common.3.2.0.0\lib\net45-full\Ninject.Web.Common.dll</HintPath>
+      <HintPath>..\packages\Ninject.Web.Common.3.2.3.0\lib\net45-full\Ninject.Web.Common.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Ninject.Web.WebApi, Version=3.2.0.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
       <HintPath>..\packages\Ninject.Web.WebApi.3.2.4.0\lib\net45-full\Ninject.Web.WebApi.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="System.Data.Services" />
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Web.DynamicData" />
@@ -225,6 +230,7 @@
   <ItemGroup>
     <Compile Include="App_Start\DBPlumbing.cs" />
     <Compile Include="App_Start\RepositoryModule.cs" />
+    <Compile Include="App_Start\SessionProvider.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Areas\HelpPage\ApiDescriptionExtensions.cs" />
     <Compile Include="Areas\HelpPage\App_Start\HelpPageConfig.cs" />
@@ -266,11 +272,6 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\AddressDTO.cs" />
-    <Compile Include="Models\EmployeeDTO.cs" />
-    <Compile Include="Models\SearchDTO.cs" />
-    <Compile Include="Models\UserDTO.cs" />
-    <Compile Include="Models\UserInputDTO.cs" />
     <Compile Include="Modules\BasicAuthHttpModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -308,13 +309,25 @@
     <Folder Include="App_Start\Plumbing\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Paymaster.DBServices\Paymaster.Services.csproj">
-      <Project>{69c093e8-40e4-48ac-aa65-25a5a0e1fdef}</Project>
-      <Name>Paymaster.Services</Name>
+    <ProjectReference Include="..\Paymaster.BusinessEntities\Paymaster.BusinessEntities.csproj">
+      <Project>{39b68de9-88ae-43eb-a59d-a5adcf22b1a2}</Project>
+      <Name>Paymaster.BusinessEntities</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Paymaster.Model\Paymaster.Model.csproj">
+    <ProjectReference Include="..\Paymaster.BusinessServices\Paymaster.BusinessServices.csproj">
+      <Project>{c0eb64a2-ca51-4c8f-be1b-ee00cee19e21}</Project>
+      <Name>Paymaster.BusinessServices</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\PayMaster.DataAccess\PayMaster.DataAccess.csproj">
+      <Project>{cdb8e470-9ab4-4776-a316-de0995d44ac3}</Project>
+      <Name>PayMaster.DataAccess</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Paymaster.Model\Paymaster.DataModel.csproj">
       <Project>{24d9ae4c-4849-462d-af92-c0e425b75c1a}</Project>
-      <Name>Paymaster.Model</Name>
+      <Name>Paymaster.DataModel</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Paymaster.RepositoryInfrastucture\Paymaster.RepositoryInfrastucture.csproj">
+      <Project>{f4a7d626-baa1-4a83-bf6d-4defddf409f1}</Project>
+      <Name>Paymaster.RepositoryInfrastucture</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

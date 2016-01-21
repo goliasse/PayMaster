@@ -1,7 +1,8 @@
-using System;
+using Paymaster.DataModel;
 using Paymaster.Model.Interfaces;
+using System;
 
-namespace Paymaster.Model
+namespace Paymaster.DataModel
 {
     public class Users : IIdAble<int>, IIsDeletable
     {

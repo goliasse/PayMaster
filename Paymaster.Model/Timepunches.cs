@@ -1,7 +1,7 @@
-using System;
 using Paymaster.Model.Interfaces;
+using System;
 
-namespace Paymaster.Model
+namespace Paymaster.DataModel
 {
     public class Timepunches : IIdAble<int>, IIsDeletable
     {
@@ -13,7 +13,7 @@ namespace Paymaster.Model
 
         public virtual decimal Hourlypayrate { get; set; }
         public virtual int? Dailyrate { get; set; }
-        
+
         public virtual string Hours { get; set; }
         public virtual int? Processed { get; set; }
     }

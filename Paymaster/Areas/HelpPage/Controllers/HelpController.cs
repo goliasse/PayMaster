@@ -21,7 +21,7 @@ namespace Paymaster.Areas.HelpPage.Controllers
         public HelpController(HttpConfiguration config)
         {
             Configuration = config;
-        } 
+        }
 
         public HttpConfiguration Configuration { get; private set; }
 

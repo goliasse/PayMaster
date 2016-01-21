@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using NHibernate;
+using Paymaster.DataModel;
 using Paymaster.Model;
 
 namespace Paymaster.DBServices

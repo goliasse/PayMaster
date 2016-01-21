@@ -1,9 +1,5 @@
-﻿namespace Paymaster.Models
+namespace Paymaster.BusinessEntities
 {
-    public abstract class SearchDTO
-    {
-    }
-
     public class EmployeeSearchDTO : SearchDTO
     {
         public string Socsec { get; set; }

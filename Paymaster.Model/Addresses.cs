@@ -1,6 +1,6 @@
 using Paymaster.Model.Interfaces;
 
-namespace Paymaster.Model
+namespace Paymaster.DataModel
 {
     public class Addresses : IIsDeletable, IIdAble<int>
     {

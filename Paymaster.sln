@@ -5,13 +5,17 @@ VisualStudioVersion = 14.0.23107.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Paymaster.WebApi", "Paymaster\Paymaster.WebApi.csproj", "{799AB86E-F463-465B-B8E0-EA116C80114A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Paymaster.Model", "Paymaster.Model\Paymaster.Model.csproj", "{24D9AE4C-4849-462D-AF92-C0E425B75C1A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Paymaster.DataModel", "Paymaster.Model\Paymaster.DataModel.csproj", "{24D9AE4C-4849-462D-AF92-C0E425B75C1A}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Paymaster.Services", "Paymaster.DBServices\Paymaster.Services.csproj", "{69C093E8-40E4-48AC-AA65-25A5A0E1FDEF}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PayMaster.DataAccess", "PayMaster.DataAccess\PayMaster.DataAccess.csproj", "{CDB8E470-9AB4-4776-A316-DE0995D44AC3}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Paymaster.RepositoryInfrastucture", "Paymaster.RepositoryInfrastucture\Paymaster.RepositoryInfrastucture.csproj", "{F4A7D626-BAA1-4A83-BF6D-4DEFDDF409F1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Paymaster.BusinessEntities", "Paymaster.BusinessEntities\Paymaster.BusinessEntities.csproj", "{39B68DE9-88AE-43EB-A59D-A5ADCF22B1A2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Paymaster.BusinessServices", "Paymaster.BusinessServices\Paymaster.BusinessServices.csproj", "{C0EB64A2-CA51-4C8F-BE1B-EE00CEE19E21}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +43,14 @@ Global
 		{F4A7D626-BAA1-4A83-BF6D-4DEFDDF409F1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F4A7D626-BAA1-4A83-BF6D-4DEFDDF409F1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F4A7D626-BAA1-4A83-BF6D-4DEFDDF409F1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{39B68DE9-88AE-43EB-A59D-A5ADCF22B1A2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{39B68DE9-88AE-43EB-A59D-A5ADCF22B1A2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{39B68DE9-88AE-43EB-A59D-A5ADCF22B1A2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{39B68DE9-88AE-43EB-A59D-A5ADCF22B1A2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C0EB64A2-CA51-4C8F-BE1B-EE00CEE19E21}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C0EB64A2-CA51-4C8F-BE1B-EE00CEE19E21}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C0EB64A2-CA51-4C8F-BE1B-EE00CEE19E21}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C0EB64A2-CA51-4C8F-BE1B-EE00CEE19E21}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

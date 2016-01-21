@@ -1,6 +1,6 @@
 using System;
 
-namespace Paymaster.Model
+namespace Paymaster.DataModel
 {
     public class Employeechangelog
     {

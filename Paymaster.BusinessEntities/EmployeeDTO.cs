@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Paymaster.Models
+namespace Paymaster.BusinessEntities
 {
     public class EmployeeDTO
     {

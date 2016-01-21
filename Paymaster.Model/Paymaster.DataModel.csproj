@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{69C093E8-40E4-48AC-AA65-25A5A0E1FDEF}</ProjectGuid>
+    <ProjectGuid>{24D9AE4C-4849-462D-AF92-C0E425B75C1A}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Paymaster.DBServices</RootNamespace>
-    <AssemblyName>Paymaster.DBServices</AssemblyName>
+    <RootNamespace>Paymaster.DataModel</RootNamespace>
+    <AssemblyName>Paymaster.DataModel</AssemblyName>
     <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -40,37 +40,31 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="abstracts\GenericHibernateDao.cs" />
-    <Compile Include="AddressService.cs" />
-    <Compile Include="AuthenticationServices.cs" />
-    <Compile Include="BaseDBService.cs" />
-    <Compile Include="CheckService.cs" />
-    <Compile Include="EarningService.cs" />
-    <Compile Include="EmailService.cs" />
-    <Compile Include="EmployeeService.cs" />
-    <Compile Include="EmployeeDeductionService.cs" />
-    <Compile Include="FedAllowanceService.cs" />
-    <Compile Include="FedTaxTablesService.cs" />
-    <Compile Include="IDBService.cs" />
-    <Compile Include="Interfaces\IAuthenticationServices.cs" />
-    <Compile Include="PayorService.cs" />
-    <Compile Include="PayorVariableService.cs" />
-    <Compile Include="PayPeriodService.cs" />
-    <Compile Include="PhoneService.cs" />
+    <Compile Include="Addresses.cs" />
+    <Compile Include="Checks.cs" />
+    <Compile Include="Earnings.cs" />
+    <Compile Include="Emails.cs" />
+    <Compile Include="Employeechangelog.cs" />
+    <Compile Include="Employeedeductions.cs" />
+    <Compile Include="Employees.cs" />
+    <Compile Include="Events\SoftDeletableLoadEventListener.cs" />
+    <Compile Include="Fedallowances.cs" />
+    <Compile Include="Fedtaxtables.cs" />
+    <Compile Include="FilingStatus.cs" />
+    <Compile Include="Interfaces\IIsDeletable.cs" />
+    <Compile Include="Interfaces\IIdAble.cs" />
+    <Compile Include="Interfaces\ISoftDeletable.cs" />
+    <Compile Include="Payors.cs" />
+    <Compile Include="Payorvariables.cs" />
+    <Compile Include="Payperiods.cs" />
+    <Compile Include="Phones.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="TimepunchService.cs" />
-    <Compile Include="UserAccessService.cs" />
-    <Compile Include="UserService.cs" />
+    <Compile Include="Timepunches.cs" />
+    <Compile Include="Useraccess.cs" />
+    <Compile Include="Users.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Paymaster.Model\Paymaster.DataModel.csproj">
-      <Project>{24d9ae4c-4849-462d-af92-c0e425b75c1a}</Project>
-      <Name>Paymaster.DataModel</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="concretes\" />
-    <Folder Include="Services\" />
+    <Content Include="MigrationScript.sql" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

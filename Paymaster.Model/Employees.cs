@@ -1,7 +1,7 @@
 using Paymaster.Model.Interfaces;
 using System;
 
-namespace Paymaster.Model
+namespace Paymaster.DataModel
 {
     public class Employees : ISoftDeletable, IIdAble<int>
     {

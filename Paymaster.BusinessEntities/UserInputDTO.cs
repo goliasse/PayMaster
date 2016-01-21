@@ -1,4 +1,4 @@
-﻿namespace Paymaster.Models
+namespace Paymaster.BusinessEntities
 {
     public class UserInputDTO
     {

@@ -78,9 +78,9 @@
     <Compile Include="UnitOfWork.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Paymaster.Model\Paymaster.Model.csproj">
+    <ProjectReference Include="..\Paymaster.Model\Paymaster.DataModel.csproj">
       <Project>{24d9ae4c-4849-462d-af92-c0e425b75c1a}</Project>
-      <Name>Paymaster.Model</Name>
+      <Name>Paymaster.DataModel</Name>
     </ProjectReference>
     <ProjectReference Include="..\Paymaster.RepositoryInfrastucture\Paymaster.RepositoryInfrastucture.csproj">
       <Project>{f4a7d626-baa1-4a83-bf6d-4defddf409f1}</Project>

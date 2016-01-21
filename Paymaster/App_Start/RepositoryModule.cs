@@ -1,15 +1,34 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Linq;
-using System.Web;
+﻿using NHibernate;
 using Ninject.Modules;
+using Ninject.Web.Common;
+using Paymaster.RepositoryInfrastucture;
+using PayMaster.DataAccess;
+using System.Configuration;
+using Paymaster.BusinessServices;
+
+//using System.Data.Services;
 
 namespace Paymaster.App_Start
 {
     public class RepositoryModule : NinjectModule
     {
-        string connectionString = ConfigurationManager.ConnectionStrings["defaultconnection"].ConnectionString;
+        public override void Load()
+        {
+            string connectionString = ConfigurationManager.ConnectionStrings["defaultconnection"].ConnectionString;
 
+            NHibernateHelper helper = new NHibernateHelper(connectionString);
+
+            Bind<ISessionFactory>().ToConstant(helper.SessionFactory)
+                    .InSingletonScope();
+
+            Bind<IUnitOfWork>().To<UnitOfWork>().InRequestScope();
+            Bind<ISession>().ToProvider(new SessionProvider())
+                .InRequestScope();
+            //Bind<IIntKeyedRepository<Payors>>().To<Repository<Payors>>();
+            Bind<IPayorService>().To<PayorService>();
+            
+            //Bind<IIntKeyedRepository<Employee>>().To<Repository<Truck>>()
+            //    .InRequestScope();
+        }
     }
 }
