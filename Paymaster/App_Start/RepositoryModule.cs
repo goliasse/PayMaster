@@ -5,6 +5,7 @@ using Paymaster.RepositoryInfrastucture;
 using PayMaster.DataAccess;
 using System.Configuration;
 using Paymaster.BusinessServices;
+using Paymaster.BusinessServices.Interfaces;
 
 //using System.Data.Services;
 
@@ -22,13 +23,9 @@ namespace Paymaster.App_Start
                     .InSingletonScope();
 
             Bind<IUnitOfWork>().To<UnitOfWork>().InRequestScope();
-            Bind<ISession>().ToProvider(new SessionProvider())
-                .InRequestScope();
+            Bind<ISession>().ToProvider(new SessionProvider()).InRequestScope();
             //Bind<IIntKeyedRepository<Payors>>().To<Repository<Payors>>();
             Bind<IPayorService>().To<PayorService>();
-            
-            //Bind<IIntKeyedRepository<Employee>>().To<Repository<Truck>>()
-            //    .InRequestScope();
         }
     }
 }

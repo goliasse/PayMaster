@@ -2,24 +2,22 @@
 using Paymaster.RepositoryInfrastucture;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using Paymaster.BusinessEntities;
 using Paymaster.BusinessServices;
+using Paymaster.BusinessServices.Interfaces;
 using Paymaster.DataModel;
 
 namespace Paymaster.Controllers
 {
-    public class PayorController : BaseApiController
+    public class PayorController : ApiController//BaseApiController
     {
         private readonly IPayorService _payorService;
         private readonly IUnitOfWork _unitOfWork;
-
-        //public PayorController(IIntKeyedRepository<Payors> payorRepository, IUnitOfWork unitOfWork)
-        //{
-        //    _payorRepository = payorRepository;
-        //    _unitOfWork = unitOfWork;
-        //}
+        
         public PayorController(IPayorService payorService, IUnitOfWork unitOfWork)
         {
             _payorService = payorService;
