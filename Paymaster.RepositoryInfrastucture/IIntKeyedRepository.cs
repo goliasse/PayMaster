@@ -1,4 +1,4 @@
-﻿namespace Paymaster.RepositoryInfrastucture
+namespace Paymaster.RepositoryInfrastucture
 {
     public interface IIntKeyedRepository<TEntity> : IRepository<TEntity> where TEntity : class
     {

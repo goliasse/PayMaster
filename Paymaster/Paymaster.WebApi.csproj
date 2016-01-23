@@ -73,10 +73,6 @@
       <HintPath>..\packages\NHibernate.4.0.0.4000\lib\net40\NHibernate.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="NHibernate.Linq, Version=1.1.0.1001, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\NHibernate.Linq.1.0\lib\NHibernate.Linq.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="Ninject, Version=3.2.0.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
       <HintPath>..\packages\Ninject.3.2.2.0\lib\net45-full\Ninject.dll</HintPath>
       <Private>True</Private>
@@ -87,6 +83,10 @@
     </Reference>
     <Reference Include="Ninject.Web.WebApi, Version=3.2.0.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
       <HintPath>..\packages\Ninject.Web.WebApi.3.2.4.0\lib\net45-full\Ninject.Web.WebApi.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
+      <HintPath>..\packages\NLog.4.2.3\lib\net45\NLog.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System.Data.Services" />
@@ -228,9 +228,14 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ActionFilters\AuthorizationRequiredAttribute.cs" />
+    <Compile Include="ActionFilters\GlobalExceptionAttribute.cs" />
+    <Compile Include="ActionFilters\HibernateSessionFilter.cs" />
+    <Compile Include="ActionFilters\LoggingFilterAttribute.cs" />
     <Compile Include="App_Start\DBPlumbing.cs" />
     <Compile Include="App_Start\NinjectWebCommon.cs" />
     <Compile Include="App_Start\RepositoryModule.cs" />
+    <Compile Include="App_Start\BusinessServiceModule.cs" />
     <Compile Include="App_Start\SessionProvider.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Areas\HelpPage\ApiDescriptionExtensions.cs" />
@@ -262,6 +267,7 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="Controllers\AddressController.cs" />
+    <Compile Include="Controllers\AuthenticateController.cs" />
     <Compile Include="Controllers\BaseApiController.cs" />
     <Compile Include="Controllers\EmailController.cs" />
     <Compile Include="Controllers\EmployeeController.cs" />
@@ -270,9 +276,19 @@
     <Compile Include="Controllers\SearchController.cs" />
     <Compile Include="Controllers\TimepunchController.cs" />
     <Compile Include="Controllers\UserController.cs" />
+    <Compile Include="ErrorHelper\ApiBusinessException.cs" />
+    <Compile Include="ErrorHelper\ApiDataException.cs" />
+    <Compile Include="ErrorHelper\ApiException.cs" />
+    <Compile Include="ErrorHelper\IApiExceptions.cs" />
+    <Compile Include="Filters\ApiAuthenticationFilter.cs" />
+    <Compile Include="Filters\BasicAuthenticationIdentity.cs" />
+    <Compile Include="Filters\GenericAuthenticationFilter.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\Extensions.cs" />
+    <Compile Include="Helpers\NLogger.cs" />
+    <Compile Include="Helpers\ServiceStatus.cs" />
     <Compile Include="Modules\BasicAuthHttpModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -318,17 +334,17 @@
       <Project>{c0eb64a2-ca51-4c8f-be1b-ee00cee19e21}</Project>
       <Name>Paymaster.BusinessServices</Name>
     </ProjectReference>
-    <ProjectReference Include="..\PayMaster.DataAccess\PayMaster.DataAccess.csproj">
+    <ProjectReference Include="..\PayMaster.DataAccess\Paymaster.DataAccessLayer.csproj">
       <Project>{cdb8e470-9ab4-4776-a316-de0995d44ac3}</Project>
-      <Name>PayMaster.DataAccess</Name>
+      <Name>Paymaster.DataAccessLayer</Name>
     </ProjectReference>
     <ProjectReference Include="..\Paymaster.Model\Paymaster.DataModel.csproj">
       <Project>{24d9ae4c-4849-462d-af92-c0e425b75c1a}</Project>
       <Name>Paymaster.DataModel</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Paymaster.RepositoryInfrastucture\Paymaster.RepositoryInfrastucture.csproj">
+    <ProjectReference Include="..\Paymaster.RepositoryInfrastucture\Paymaster.Repositories.csproj">
       <Project>{f4a7d626-baa1-4a83-bf6d-4defddf409f1}</Project>
-      <Name>Paymaster.RepositoryInfrastucture</Name>
+      <Name>Paymaster.Repositories</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

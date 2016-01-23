@@ -4,9 +4,9 @@ using Paymaster.DataModel;
 
 namespace PayMaster.DataAccess.Map
 {
-    public class UseraccessMap : ClassMap<Useraccess>
+    public class UserAccessMap : ClassMap<UserAccess>
     {
-        public UseraccessMap()
+        public UserAccessMap()
         {
             DefaultLazy.Always();
             Id(x => x.Id);//, map => map.Generator(Generators.Assigned));

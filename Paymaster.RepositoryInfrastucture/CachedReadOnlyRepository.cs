@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Linq;
 using System.Linq.Expressions;
 
@@ -34,14 +34,23 @@ namespace Paymaster.RepositoryInfrastucture
 
         #region IReadOnlyRepository<T> Members
 
-        public T FindBy(Expression<Func<T, bool>> expression)
-        {
-            return FilterBy(expression).Single();
-        }
+        //public T FindBy(Expression<Func<T, bool>> expression)
+        //{
+        //    return FilterBy(expression).Single();
+        //}
 
-        public IQueryable<T> FilterBy(Expression<Func<T, bool>> expression)
+        //public IQueryable<T> FilterBy(Expression<Func<T, bool>> expression)
+        //{
+        //    return All().Where(expression).AsQueryable();
+        //}
+
+        public T FindBy(Func<T, Boolean> where)
         {
-            return All().Where(expression).AsQueryable();
+            return FilterBy(where).Single();
+        }
+        public IQueryable<T> FilterBy(Func<T, Boolean> where)
+        {
+            return All().Where(where).AsQueryable();
         }
 
         #endregion IReadOnlyRepository<T> Members

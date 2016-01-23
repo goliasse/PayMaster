@@ -1,15 +1,12 @@
-﻿using NHibernate;
+using NHibernate;
 using Ninject.Modules;
 using Ninject.Web.Common;
+using Paymaster.App_Start;
 using Paymaster.RepositoryInfrastucture;
 using PayMaster.DataAccess;
 using System.Configuration;
-using Paymaster.BusinessServices;
-using Paymaster.BusinessServices.Interfaces;
 
-//using System.Data.Services;
-
-namespace Paymaster.App_Start
+namespace Paymaster
 {
     public class RepositoryModule : NinjectModule
     {
@@ -20,12 +17,12 @@ namespace Paymaster.App_Start
             NHibernateHelper helper = new NHibernateHelper(connectionString);
 
             Bind<ISessionFactory>().ToConstant(helper.SessionFactory)
-                    .InSingletonScope();
+                .InSingletonScope();
 
             Bind<IUnitOfWork>().To<UnitOfWork>().InRequestScope();
             Bind<ISession>().ToProvider(new SessionProvider()).InRequestScope();
-            //Bind<IIntKeyedRepository<Payors>>().To<Repository<Payors>>();
-            Bind<IPayorService>().To<PayorService>();
+            Bind<ITokenRepository>().To<TokenRepository>();
+            Bind<IUserRepository>().To<UserRepository>();
         }
     }
 }

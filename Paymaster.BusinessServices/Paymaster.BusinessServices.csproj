@@ -42,11 +42,8 @@
       <HintPath>..\packages\NHibernate.4.0.0.4000\lib\net40\NHibernate.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="NHibernate.Linq, Version=1.1.0.1001, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\NHibernate.Linq.1.0\lib\NHibernate.Linq.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.Services" />
     <Reference Include="System.Xml.Linq" />
@@ -58,21 +55,29 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Interfaces\IPayorService.cs" />
+    <Compile Include="Interfaces\ITokenService.cs" />
+    <Compile Include="Interfaces\IUserService.cs" />
     <Compile Include="PayorService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TokenService.cs" />
+    <Compile Include="UserService.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\PayMaster.DataAccess\PayMaster.DataAccess.csproj">
+    <ProjectReference Include="..\Paymaster.BusinessEntities\Paymaster.BusinessEntities.csproj">
+      <Project>{39b68de9-88ae-43eb-a59d-a5adcf22b1a2}</Project>
+      <Name>Paymaster.BusinessEntities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\PayMaster.DataAccess\Paymaster.DataAccessLayer.csproj">
       <Project>{cdb8e470-9ab4-4776-a316-de0995d44ac3}</Project>
-      <Name>PayMaster.DataAccess</Name>
+      <Name>Paymaster.DataAccessLayer</Name>
     </ProjectReference>
     <ProjectReference Include="..\Paymaster.Model\Paymaster.DataModel.csproj">
       <Project>{24d9ae4c-4849-462d-af92-c0e425b75c1a}</Project>
       <Name>Paymaster.DataModel</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Paymaster.RepositoryInfrastucture\Paymaster.RepositoryInfrastucture.csproj">
+    <ProjectReference Include="..\Paymaster.RepositoryInfrastucture\Paymaster.Repositories.csproj">
       <Project>{f4a7d626-baa1-4a83-bf6d-4defddf409f1}</Project>
-      <Name>Paymaster.RepositoryInfrastucture</Name>
+      <Name>Paymaster.Repositories</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

@@ -3,7 +3,7 @@ using Paymaster.RepositoryInfrastucture;
 
 namespace Paymaster.BusinessServices.Interfaces
 {
-    public interface IPayorService : IIntKeyedRepository<Payors>
+    public interface IPayorService : IIntKeyedRepository<Payor>
     {
     }
 }

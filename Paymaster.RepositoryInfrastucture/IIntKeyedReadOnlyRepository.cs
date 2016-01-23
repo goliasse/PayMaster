@@ -1,4 +1,4 @@
-﻿namespace Paymaster.RepositoryInfrastucture
+namespace Paymaster.RepositoryInfrastucture
 {
     public interface IIntKeyedReadOnlyRepository<TEntity> : IReadOnlyRepository<TEntity> where TEntity : class
     {

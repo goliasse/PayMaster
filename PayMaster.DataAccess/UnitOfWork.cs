@@ -27,6 +27,7 @@ namespace PayMaster.DataAccess
         {
             if (Session.IsOpen)
             {
+                Commit();//commit before disposing
                 Session.Close();
             }
         }

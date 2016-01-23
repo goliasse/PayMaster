@@ -6,14 +6,12 @@ using PayMaster.DataAccess;
 
 namespace Paymaster.BusinessServices
 {
-    public class PayorService : Repository<Payors>, IPayorService
+    public class PayorService : Repository<Payor>, IPayorService
     {
-        private readonly ISession _session;
         private readonly IUnitOfWork _unitOfWork;
 
         public PayorService(ISession session, IUnitOfWork unitOfWork) : base(session)
         {
-            _session = session;
             _unitOfWork = unitOfWork;
         }
     }

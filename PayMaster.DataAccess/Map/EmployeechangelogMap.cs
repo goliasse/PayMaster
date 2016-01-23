@@ -4,7 +4,7 @@ using Paymaster.DataModel;
 
 namespace PayMaster.DataAccess.Map
 {
-    public class EmployeechangelogMap : ClassMap<Employeechangelog>
+    public class EmployeechangelogMap : ClassMap<EmployeeChangeLog>
     {
         public EmployeechangelogMap()
         {

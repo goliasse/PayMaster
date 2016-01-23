@@ -40,28 +40,29 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Addresses.cs" />
-    <Compile Include="Checks.cs" />
-    <Compile Include="Earnings.cs" />
-    <Compile Include="Emails.cs" />
-    <Compile Include="Employeechangelog.cs" />
-    <Compile Include="Employeedeductions.cs" />
-    <Compile Include="Employees.cs" />
+    <Compile Include="Address.cs" />
+    <Compile Include="Check.cs" />
+    <Compile Include="Earning.cs" />
+    <Compile Include="Email.cs" />
+    <Compile Include="EmployeeChangeLog.cs" />
+    <Compile Include="EmployeeDeduction.cs" />
+    <Compile Include="Employee.cs" />
     <Compile Include="Events\SoftDeletableLoadEventListener.cs" />
-    <Compile Include="Fedallowances.cs" />
-    <Compile Include="Fedtaxtables.cs" />
+    <Compile Include="FedAllowance.cs" />
+    <Compile Include="FedTaxTable.cs" />
     <Compile Include="FilingStatus.cs" />
     <Compile Include="Interfaces\IIsDeletable.cs" />
     <Compile Include="Interfaces\IIdAble.cs" />
     <Compile Include="Interfaces\ISoftDeletable.cs" />
-    <Compile Include="Payors.cs" />
-    <Compile Include="Payorvariables.cs" />
-    <Compile Include="Payperiods.cs" />
-    <Compile Include="Phones.cs" />
+    <Compile Include="Payor.cs" />
+    <Compile Include="PayorVariable.cs" />
+    <Compile Include="PayPeriod.cs" />
+    <Compile Include="Phone.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Timepunches.cs" />
-    <Compile Include="Useraccess.cs" />
-    <Compile Include="Users.cs" />
+    <Compile Include="TimePunch.cs" />
+    <Compile Include="Token.cs" />
+    <Compile Include="UserAccess.cs" />
+    <Compile Include="User.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="MigrationScript.sql" />

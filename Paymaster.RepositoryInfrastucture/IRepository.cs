@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+using System;
+using System.Collections.Generic;
+using System.Linq.Expressions;
 
 namespace Paymaster.RepositoryInfrastucture
 {
@@ -13,5 +15,7 @@ namespace Paymaster.RepositoryInfrastucture
         bool Delete(TEntity entity);
 
         bool Delete(IEnumerable<TEntity> entities);
+
+        bool Delete(Expression<Func<TEntity, bool>> expression);
     }
 }

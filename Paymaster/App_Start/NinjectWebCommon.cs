@@ -1,5 +1,6 @@
 using System.Web.Http;
 using Ninject.Web.WebApi;
+using PayMaster.DataAccess;
 
 [assembly: WebActivatorEx.PreApplicationStartMethod(typeof(Paymaster.App_Start.NinjectWebCommon), "Start")]
 [assembly: WebActivatorEx.ApplicationShutdownMethodAttribute(typeof(Paymaster.App_Start.NinjectWebCommon), "Stop")]
@@ -69,6 +70,8 @@ namespace Paymaster.App_Start
         private static void RegisterServices(IKernel kernel)
         {
             kernel.Load(new RepositoryModule());
+            kernel.Load(new BusinessServiceModule());
+            
         }        
     }
 }
