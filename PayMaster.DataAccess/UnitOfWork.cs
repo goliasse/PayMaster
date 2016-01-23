@@ -1,18 +1,14 @@
 ﻿using NHibernate;
 using Paymaster.RepositoryInfrastucture;
 using System;
-using System.Collections.Generic;
 using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PayMaster.DataAccess
 {
     public class UnitOfWork : IUnitOfWork
     {
         private readonly ISessionFactory _sessionFactory;
-        private readonly ITransaction _transaction;
+        private ITransaction _transaction;
         public ISession Session { get; private set; }
 
         public UnitOfWork(ISessionFactory sessionFactory)
@@ -30,7 +26,13 @@ namespace PayMaster.DataAccess
                 Commit();//commit before disposing
                 Session.Close();
             }
+            Session = null;
         }
+
+        //public void BeginTransaction()
+        //{
+        //    _transaction = Session.BeginTransaction(IsolationLevel.ReadCommitted);
+        //}
 
         public void Commit()
         {

@@ -526,6 +526,40 @@
             <param name="userId"></param>
             <returns></returns>
         </member>
+        <member name="M:Paymaster.Controllers.EmployeeController.Get">
+            <summary>
+            List all employees
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Paymaster.Controllers.EmployeeController.Get(System.Int32)">
+            <summary>
+            Get employee by employee Id
+            </summary>
+            <param name="id">Id of the employee to be searched</param>
+            <returns></returns>
+        </member>
+        <member name="M:Paymaster.Controllers.EmployeeController.Post(Paymaster.BusinessEntities.EmployeeDTO)">
+            <summary>
+            Method to insert/save employee record
+            </summary>
+            <param name="employee">Employee records to be inserted/saved</param>
+            <returns></returns>
+        </member>
+        <member name="M:Paymaster.Controllers.EmployeeController.Put(Paymaster.BusinessEntities.EmployeeDTO)">
+            <summary>
+            Method to update employee
+            </summary>
+            <param name="employee">Employee record to be updated</param>
+            <returns></returns>
+        </member>
+        <member name="M:Paymaster.Controllers.EmployeeController.Delete(System.Int32)">
+            <summary>
+            Method to delete record
+            </summary>
+            <param name="id">Employee id</param>
+            <returns></returns>
+        </member>
         <member name="M:Paymaster.Controllers.PayorController.Get">
             <summary>
             List all payor

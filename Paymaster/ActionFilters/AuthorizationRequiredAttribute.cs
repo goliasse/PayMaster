@@ -12,11 +12,6 @@ namespace Paymaster.ActionFilters
 {
     public class AuthorizationRequiredAttribute : ActionFilterAttribute
     {
-        //IUnitOfWork unitOfWork
-        //public AuthorizationRequiredAttribute(IUnitOfWork unitOfWork)
-        //{
-            
-        //}
         private const string Token = "Token";
 
         public override void OnActionExecuting(HttpActionContext filterContext)

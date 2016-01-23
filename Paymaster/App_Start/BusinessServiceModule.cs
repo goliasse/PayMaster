@@ -8,6 +8,7 @@ namespace Paymaster.App_Start
     {
         public override void Load()
         {
+            Bind<IEmployeeService>().To<EmployeeService>();
             Bind<IPayorService>().To<PayorService>();
             Bind<ITokenService>().To<TokenService>();
             Bind<IUserService>().To<UserService>();
