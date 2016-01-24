@@ -15,3 +15,13 @@ RENAME TO  `paymaster_dev`.`employeechangelogs` ;
 
 ALTER TABLE `paymaster_dev`.`useraccess` 
 RENAME TO  `paymaster_dev`.`useraccesses` ;
+
+
+CREATE TABLE `tokens` (
+  `Id` int(11) NOT NULL AUTO_INCREMENT,
+  `UserId` int(11) DEFAULT NULL,
+  `AuthToken` varchar(255) DEFAULT NULL,
+  `IssuedOn` datetime DEFAULT NULL,
+  `ExpiresOn` datetime DEFAULT NULL,
+  PRIMARY KEY (`Id`)
+) ENGINE=InnoDB AUTO_INCREMENT=41 DEFAULT CHARSET=utf8;
