@@ -1,33 +1,31 @@
-﻿//using NHibernate;
-//using Paymaster.App_Start;
-//using Paymaster.DBServices;
-//using Paymaster.Model;
-//using System.Collections.Generic;
-//using System.Linq;
+﻿using Paymaster.BusinessServices.Interfaces;
+using Paymaster.DataModel;
+using Paymaster.Filters;
+using System.Collections.Generic;
+using System.Linq;
 
-//namespace Paymaster.Controllers
-//{
-//    public class TimepunchController : BaseApiController
-//    {
-//        private ISessionFactory _sessionFactory;
-//        private TimepunchService _timepunchService;
+namespace Paymaster.Controllers
+{
+    public class TimePunchController : BaseApiController
+    {
+        private readonly ITimePunchService _timePunchService;
 
-//        public TimepunchController()
-//        {
-//            _sessionFactory = DBPlumbing.CreateSessionFactory();
-//            _timepunchService = new TimepunchService(_sessionFactory);
-//        }
+        public TimePunchController(ITimePunchService timePunchService)
+        {
+            _timePunchService = timePunchService;
+        }
 
-//        /// <summary>
-//        /// List all Address
-//        /// </summary>
-//        /// <returns></returns>
-//        public IEnumerable<Timepunches> Get()
-//        {
-//            //TODO: to be fetched form loggedin user's ID
-//            int employeeID = 1;//loggedin user ID
-
-//            return _timepunchService.GetAll().Where(t => t.Employees.Id == employeeID).AsEnumerable();
-//        }
-//    }
-//}
+        /// <summary>
+        /// List all Address
+        /// </summary>
+        /// <returns></returns>
+        public IEnumerable<TimePunch> Get()
+        {
+            //TODO: to be fetched form loggedin user's ID
+            var loggedInuser = User.Identity as BasicAuthenticationIdentity;
+            if (loggedInuser != null)
+                return _timePunchService.All().Where(t => t.Employees.Id == loggedInuser.UserId).AsEnumerable();
+            return null;
+        }
+    }
+}

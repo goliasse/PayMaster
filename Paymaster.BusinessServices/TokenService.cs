@@ -13,8 +13,7 @@ namespace Paymaster.BusinessServices
         #region Private member variables.
 
         private readonly ITokenRepository _tokenRepository;
-        private readonly IUnitOfWork _unitOfWork;
-
+        
         #endregion Private member variables.
 
         #region Public constructor.
@@ -22,10 +21,9 @@ namespace Paymaster.BusinessServices
         /// <summary>
         /// Public constructor.
         /// </summary>
-        public TokenService(ITokenRepository tokenRepository, IUnitOfWork unitOfWork)
+        public TokenService(ITokenRepository tokenRepository)
         {
             _tokenRepository = tokenRepository;
-            _unitOfWork = unitOfWork;
         }
 
         #endregion Public constructor.

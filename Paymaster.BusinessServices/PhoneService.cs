@@ -5,9 +5,9 @@ using PayMaster.DataAccess;
 
 namespace Paymaster.BusinessServices
 {
-    public class EmployeeService : Repository<Employee>, IEmployeeService
+    public class PhoneService : Repository<Phone>, IPhoneService
     {
-        public EmployeeService(ISession session) : base(session)
+        public PhoneService(ISession session) : base(session)
         {
         }
     }

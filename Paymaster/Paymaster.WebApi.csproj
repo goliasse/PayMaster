@@ -52,6 +52,14 @@
       <HintPath>..\packages\FluentNHibernate.2.0.3.0\lib\net40\FluentNHibernate.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Glimpse.Core, Version=1.6.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Glimpse.1.6.1\lib\net45\Glimpse.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="HibernatingRhinos.Profiler.Appender, Version=3.0.0.0, Culture=neutral, PublicKeyToken=0774796e73ebf640, processorArchitecture=MSIL">
+      <HintPath>..\packages\NHibernateProfiler.3.0.3090.0\lib\HibernatingRhinos.Profiler.Appender.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Iesi.Collections, Version=4.0.0.0, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
       <HintPath>..\packages\Iesi.Collections.4.0.1.4000\lib\net40\Iesi.Collections.dll</HintPath>
       <Private>True</Private>
@@ -71,6 +79,10 @@
     </Reference>
     <Reference Include="NHibernate, Version=4.0.0.4000, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
       <HintPath>..\packages\NHibernate.4.0.4.4000\lib\net40\NHibernate.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="NHibernate.Glimpse, Version=3.3.3.4001, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\NHibernate.Glimpse.3.3.3.40011\lib\net35\NHibernate.Glimpse.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Ninject, Version=3.2.0.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
@@ -133,7 +145,7 @@
     <Reference Include="System.Web.Services" />
     <Reference Include="System.EnterpriseServices" />
     <Reference Include="WebActivatorEx, Version=2.0.0.0, Culture=neutral, PublicKeyToken=7b26dc2a43f6a0d4, processorArchitecture=MSIL">
-      <HintPath>..\packages\WebActivatorEx.2.0\lib\net40\WebActivatorEx.dll</HintPath>
+      <HintPath>..\packages\WebActivatorEx.2.0.5\lib\net40\WebActivatorEx.dll</HintPath>
       <Private>True</Private>
     </Reference>
   </ItemGroup>
@@ -152,6 +164,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Start\NHibernateProfilerBootstrapper.vb" />
     <Content Include="Areas\HelpPage\HelpPage.css" />
     <Content Include="Areas\HelpPage\TestClient.css" />
     <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
@@ -232,8 +245,8 @@
     <Compile Include="ActionFilters\GlobalExceptionAttribute.cs" />
     <Compile Include="ActionFilters\HibernateSessionFilter.cs" />
     <Compile Include="ActionFilters\LoggingFilterAttribute.cs" />
-    <Compile Include="ActionFilters\UnitOfWorkAttribute.cs" />
     <Compile Include="App_Start\DBPlumbing.cs" />
+    <Compile Include="App_Start\NHibernateProfilerBootstrapper.cs" />
     <Compile Include="App_Start\NinjectWebCommon.cs" />
     <Compile Include="App_Start\RepositoryModule.cs" />
     <Compile Include="App_Start\BusinessServiceModule.cs" />
@@ -275,7 +288,7 @@
     <Compile Include="Controllers\PayorController.cs" />
     <Compile Include="Controllers\PhoneController.cs" />
     <Compile Include="Controllers\SearchController.cs" />
-    <Compile Include="Controllers\TimepunchController.cs" />
+    <Compile Include="Controllers\TimePunchController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="ErrorHelper\ApiBusinessException.cs" />
     <Compile Include="ErrorHelper\ApiDataException.cs" />

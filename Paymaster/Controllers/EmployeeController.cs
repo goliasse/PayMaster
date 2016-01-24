@@ -2,7 +2,6 @@
 using Paymaster.BusinessEntities;
 using Paymaster.BusinessServices.Interfaces;
 using Paymaster.DataModel;
-using Paymaster.RepositoryInfrastucture;
 using System;
 using System.Collections.Generic;
 using System.Net;
@@ -15,13 +14,11 @@ namespace Paymaster.Controllers
     {
         private readonly IPayorService _payorService;
         private readonly IEmployeeService _employeeService;
-        private readonly IUnitOfWork _unitOfWork;
 
-        public EmployeeController(IPayorService payorService, IEmployeeService employeeService, IUnitOfWork unitOfWork)
+        public EmployeeController(IPayorService payorService, IEmployeeService employeeService)
         {
             _payorService = payorService;
             _employeeService = employeeService;
-            _unitOfWork = unitOfWork;
 
             Mapper.CreateMap<EmployeeDTO, Employee>()
                .AfterMap(

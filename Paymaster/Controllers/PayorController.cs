@@ -1,8 +1,6 @@
 ﻿using AutoMapper;
-using Paymaster.ActionFilters;
 using Paymaster.BusinessServices.Interfaces;
 using Paymaster.DataModel;
-using Paymaster.RepositoryInfrastucture;
 using System;
 using System.Collections.Generic;
 using System.Net;
@@ -11,16 +9,13 @@ using System.Web.Http;
 
 namespace Paymaster.Controllers
 {
-    
     public class PayorController : BaseApiController
     {
         private readonly IPayorService _payorService;
-        private readonly IUnitOfWork _unitOfWork;
 
-        public PayorController(IPayorService payorService, IUnitOfWork unitOfWork)
+        public PayorController(IPayorService payorService)
         {
             _payorService = payorService;
-            _unitOfWork = unitOfWork;
         }
 
         // GET: api/Payor
@@ -61,11 +56,11 @@ namespace Paymaster.Controllers
             {
                 //try
                 //{
-                    _payorService.Add(payor);
-                    //_unitOfWork.Commit();
-                    HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.Created, payor);
-                    response.Headers.Location = new Uri(Url.Link("DefaultApi", new { id = payor.Id }));
-                    return response;
+                _payorService.Add(payor);
+                //_unitOfWork.Commit();
+                HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.Created, payor);
+                response.Headers.Location = new Uri(Url.Link("DefaultApi", new { id = payor.Id }));
+                return response;
                 //}
                 //catch (Exception ex)
                 //{
@@ -119,7 +114,7 @@ namespace Paymaster.Controllers
             }
             _payorService.Delete(employee);
             //_unitOfWork.Commit();
-            
+
             return Ok();
         }
     }

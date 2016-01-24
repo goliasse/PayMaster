@@ -508,6 +508,40 @@
             </summary>
             <param name="documentPath">The physical path to XML document.</param>
         </member>
+        <member name="M:Paymaster.Controllers.AddressController.Get">
+            <summary>
+            List all Address
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Paymaster.Controllers.AddressController.Get(System.Int32)">
+            <summary>
+            Get Address by address Id
+            </summary>
+            <param name="id">Id of the payor to be searched</param>
+            <returns></returns>
+        </member>
+        <member name="M:Paymaster.Controllers.AddressController.Post(Paymaster.BusinessEntities.AddressDTO)">
+            <summary>
+            Method to insert/save payor record
+            </summary>
+            <param name="addressDto">address records to be inserted/saved</param>
+            <returns></returns>
+        </member>
+        <member name="M:Paymaster.Controllers.AddressController.Put(Paymaster.BusinessEntities.AddressDTO)">
+            <summary>
+            Method to insert/save Address
+            </summary>
+            <param name="address">address to be updated</param>
+            <returns></returns>
+        </member>
+        <member name="M:Paymaster.Controllers.AddressController.Delete(System.Int32)">
+            <summary>
+            Method to delete record
+            </summary>
+            <param name="id">record id</param>
+            <returns></returns>
+        </member>
         <member name="M:Paymaster.Controllers.AuthenticateController.#ctor(Paymaster.BusinessServices.Interfaces.ITokenService)">
             <summary>
             Public constructor to initialize product service instance
@@ -524,6 +558,40 @@
             Returns auth token for the validated user.
             </summary>
             <param name="userId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Paymaster.Controllers.EmailController.Get">
+            <summary>
+            List all Emails
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Paymaster.Controllers.EmailController.Get(System.Int32)">
+            <summary>
+            Get Email by email record Id
+            </summary>
+            <param name="id">Id of the email to be searched</param>
+            <returns></returns>
+        </member>
+        <member name="M:Paymaster.Controllers.EmailController.Post(Paymaster.DataModel.Email)">
+            <summary>
+            Method to insert/save email record
+            </summary>
+            <param name="email">email records to be inserted/saved</param>
+            <returns></returns>
+        </member>
+        <member name="M:Paymaster.Controllers.EmailController.Put(Paymaster.DataModel.Email)">
+            <summary>
+            Method to update Email
+            </summary>
+            <param name="email">email to be updated</param>
+            <returns></returns>
+        </member>
+        <member name="M:Paymaster.Controllers.EmailController.Delete(System.Int32)">
+            <summary>
+            Method to delete record
+            </summary>
+            <param name="id">record id</param>
             <returns></returns>
         </member>
         <member name="M:Paymaster.Controllers.EmployeeController.Get">
@@ -592,6 +660,87 @@
             Method to delete record
             </summary>
             <param name="id">record id</param>
+            <returns></returns>
+        </member>
+        <member name="M:Paymaster.Controllers.PhoneController.Get">
+            <summary>
+            List all phone
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Paymaster.Controllers.PhoneController.Get(System.Int32)">
+            <summary>
+            Get Email by phone record Id
+            </summary>
+            <param name="id">Id of the phone to be searched</param>
+            <returns></returns>
+        </member>
+        <member name="M:Paymaster.Controllers.PhoneController.Post(Paymaster.DataModel.Phone)">
+            <summary>
+            Method to insert/save phone record
+            </summary>
+            <param name="email">phone records to be inserted/saved</param>
+            <returns></returns>
+        </member>
+        <member name="M:Paymaster.Controllers.PhoneController.Put(Paymaster.DataModel.Phone)">
+            <summary>
+            Method to update phone
+            </summary>
+            <param name="email">phone to be updated</param>
+            <returns></returns>
+        </member>
+        <member name="M:Paymaster.Controllers.PhoneController.Delete(System.Int32)">
+            <summary>
+            Method to delete record
+            </summary>
+            <param name="id">record id</param>
+            <returns></returns>
+        </member>
+        <member name="M:Paymaster.Controllers.SearchController.Post(Paymaster.BusinessEntities.EmployeeSearchDTO)">
+            <summary>
+            Method to insert/save phone record
+            </summary>
+            <param name="email">phone records to be inserted/saved</param>
+            <returns></returns>
+        </member>
+        <member name="M:Paymaster.Controllers.TimepunchController.Get">
+            <summary>
+            List all Address
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Paymaster.Controllers.UserController.Get">
+            <summary>
+            List all Users
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Paymaster.Controllers.UserController.Get(System.Int32)">
+            <summary>
+            Get Users by User's Id
+            </summary>
+            <param name="id">Id of the user to be searched</param>
+            <returns></returns>
+        </member>
+        <member name="M:Paymaster.Controllers.UserController.Post(Paymaster.BusinessEntities.UserInputDTO)">
+            <summary>
+            Method to insert/save User record
+            </summary>
+            <param name="user">User records to be inserted/saved</param>
+            <returns></returns>
+        </member>
+        <member name="M:Paymaster.Controllers.UserController.Put(Paymaster.BusinessEntities.UserInputDTO)">
+            <summary>
+            Method to update user
+            </summary>
+            <param name="user">Users record to be updated</param>
+            <returns></returns>
+        </member>
+        <member name="M:Paymaster.Controllers.UserController.Delete(System.Int32)">
+            <summary>
+            Method to delete record
+            </summary>
+            <param name="id">Employee id</param>
             <returns></returns>
         </member>
         <member name="T:Paymaster.ErrorHelper.ApiBusinessException">

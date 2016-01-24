@@ -3,8 +3,7 @@ using Paymaster.RepositoryInfrastucture;
 
 namespace Paymaster.BusinessServices.Interfaces
 {
-    public interface IUserService : IIntKeyedRepository<User>
+    public interface IAddressService : IIntKeyedRepository<Address>
     {
-        int Authenticate(string userName, string password);
     }
 }

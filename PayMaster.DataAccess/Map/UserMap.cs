@@ -16,7 +16,7 @@ namespace PayMaster.DataAccess.Map
             Map(x => x.Sessionid);
             Map(x => x.Sessionstart);
             Map(x => x.Sessionend);
-            References(c => c.Payors, "payorId");
+            References(c => c.Payor, "payorId");
             //ManyToOne(x => x.Payors, map => { map.Column("payorID"); map.Cascade(Cascade.None); });
         }
     }

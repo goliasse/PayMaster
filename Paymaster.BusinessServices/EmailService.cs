@@ -5,9 +5,9 @@ using PayMaster.DataAccess;
 
 namespace Paymaster.BusinessServices
 {
-    public class EmployeeService : Repository<Employee>, IEmployeeService
+    public class EmailService : Repository<Email>, IEmailService
     {
-        public EmployeeService(ISession session) : base(session)
+        public EmailService(ISession session) : base(session)
         {
         }
     }
