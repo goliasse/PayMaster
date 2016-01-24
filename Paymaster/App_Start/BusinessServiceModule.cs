@@ -16,7 +16,15 @@ namespace Paymaster.App_Start
             Bind<IPhoneService>().To<PhoneService>();
             Bind<ITokenService>().To<TokenService>();
             Bind<IUserService>().To<UserService>();
-            
+            Bind<ICheckService>().To<CheckService>();
+            Bind<IEarningService>().To<EarningService>();
+            Bind<IEmployeeDeductionService>().To<EmployeeDeductionService>();
+            Bind<IFedAllowanceService>().To<FedAllowanceService>();
+            Bind<IFedTaxTableService>().To<FedTaxTableService>();
+            Bind<IPayorVariableService>().To<PayorVariableService>();
+            Bind<IPayPeriodService>().To<PayPeriodService>();
+            Bind<IUserAccessService>().To<UserAccessService>();
+
         }
     }
 }
