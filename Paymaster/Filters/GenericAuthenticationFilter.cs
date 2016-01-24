@@ -1,24 +1,21 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Security.Principal;
 using System.Text;
 using System.Threading;
-using System.Web;
 using System.Web.Http.Controllers;
 using System.Web.Http.Filters;
 
 namespace Paymaster.Filters
 {
+
     /// <summary>
     /// Generic basic Authentication filter.
     /// </summary>
     [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method, AllowMultiple = false)]
     public class GenericAuthenticationFilter : AuthorizationFilterAttribute
     {
-
         /// <summary>
         /// Public default Constructor
         /// </summary>
@@ -90,7 +87,6 @@ namespace Paymaster.Filters
             var credentials = authHeaderValue.Split(':');
             return credentials.Length < 2 ? null : new BasicAuthenticationIdentity(credentials[0], credentials[1]);
         }
-
 
         /// <summary>
         /// Send the Authentication Challenge request

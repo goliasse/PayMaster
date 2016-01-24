@@ -542,14 +542,26 @@
             <param name="id">record id</param>
             <returns></returns>
         </member>
-        <member name="M:Paymaster.Controllers.AuthenticateController.#ctor(Paymaster.BusinessServices.Interfaces.ITokenService)">
+        <member name="M:Paymaster.Controllers.AuthenticateController.#ctor(Paymaster.BusinessServices.Interfaces.ITokenService,Paymaster.BusinessServices.Interfaces.IUserService)">
             <summary>
             Public constructor to initialize product service instance
             </summary>
         </member>
-        <member name="M:Paymaster.Controllers.AuthenticateController.Authenticate">
+        <member name="M:Paymaster.Controllers.AuthenticateController.GetGenerateToken">
+            <summary>
+            Authenticates user usign Basic Authentication(username/password in header) and returns token with expiry.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Paymaster.Controllers.AuthenticateController.Post(Paymaster.BusinessEntities.LoginRequest)">
             <summary>
             Authenticates user and returns token with expiry.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Paymaster.Controllers.AuthenticateController.Post">
+            <summary>
+            Logout - logged in user
             </summary>
             <returns></returns>
         </member>
@@ -703,7 +715,7 @@
             <param name="email">phone records to be inserted/saved</param>
             <returns></returns>
         </member>
-        <member name="M:Paymaster.Controllers.TimepunchController.Get">
+        <member name="M:Paymaster.Controllers.TimePunchController.Get">
             <summary>
             List all Address
             </summary>

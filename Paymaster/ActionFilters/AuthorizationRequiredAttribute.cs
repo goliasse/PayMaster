@@ -23,7 +23,6 @@ namespace Paymaster.ActionFilters
             if (filterContext.Request.Headers.Contains(Token))
             {
                 var tokenValue = filterContext.Request.Headers.GetValues(Token).First();
-
                 // Validate Token
                 if (provider != null && !provider.ValidateToken(tokenValue))
                 {

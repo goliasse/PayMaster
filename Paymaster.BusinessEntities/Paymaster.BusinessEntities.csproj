@@ -43,6 +43,7 @@
     <Compile Include="AddressDTO.cs" />
     <Compile Include="EmployeeDTO.cs" />
     <Compile Include="EmployeeSearchDTO.cs" />
+    <Compile Include="LoginRequest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SearchDTO.cs" />
     <Compile Include="TokenEntity.cs" />

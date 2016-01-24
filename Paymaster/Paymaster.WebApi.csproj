@@ -245,6 +245,8 @@
     <Compile Include="ActionFilters\GlobalExceptionAttribute.cs" />
     <Compile Include="ActionFilters\HibernateSessionFilter.cs" />
     <Compile Include="ActionFilters\LoggingFilterAttribute.cs" />
+    <Compile Include="CustomActionResult\AddChallengeOnUnauthorizedResult.cs" />
+    <Compile Include="CustomActionResult\AuthenticationFailureResult.cs" />
     <Compile Include="App_Start\DBPlumbing.cs" />
     <Compile Include="App_Start\NHibernateProfilerBootstrapper.cs" />
     <Compile Include="App_Start\NinjectWebCommon.cs" />
