@@ -6,9 +6,12 @@ using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using Paymaster.BusinessEntities;
+using Paymaster.Filters;
 
 namespace Paymaster.Controllers
 {
+    [ApiAuthenticationFilter("admin")]
     public class PayorController : BaseApiController
     {
         private readonly IPayorService _payorService;
@@ -16,6 +19,10 @@ namespace Paymaster.Controllers
         public PayorController(IPayorService payorService)
         {
             _payorService = payorService;
+
+            Mapper.CreateMap<PayorDTO, Payor>();
+            Mapper.CreateMap<Payor, PayorDTO>();
+            Mapper.CreateMap<List<Payor>, List<PayorDTO>>();
         }
 
         // GET: api/Payor
@@ -23,9 +30,9 @@ namespace Paymaster.Controllers
         /// List all payor
         /// </summary>
         /// <returns></returns>
-        public IEnumerable<Payor> Get()
+        public IEnumerable<PayorDTO> Get()
         {
-            return _payorService.All();
+            return Mapper.Map<IEnumerable<PayorDTO>>(_payorService.All());
         }
 
         // GET: api/Payor/id
@@ -42,7 +49,7 @@ namespace Paymaster.Controllers
             {
                 return NotFound();
             }
-            return Ok(payor);
+            return Ok(Mapper.Map<PayorDTO>(payor));
         }
 
         /// <summary>
@@ -50,12 +57,13 @@ namespace Paymaster.Controllers
         /// </summary>
         /// <param name="payor">payor records to be inserted/saved</param>
         /// <returns></returns>
-        public HttpResponseMessage Post(Payor payor)
+        public HttpResponseMessage Post(PayorDTO payorDTO)
         {
             if (true)//TODO: replace this with validation logic ModelState.IsValid
             {
                 //try
                 //{
+                var payor = Mapper.Map<Payor>(payorDTO);
                 _payorService.Add(payor);
                 //_unitOfWork.Commit();
                 HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.Created, payor);
@@ -80,7 +88,7 @@ namespace Paymaster.Controllers
         /// </summary>
         /// <param name="payor">payor records to be updated</param>
         /// <returns></returns>
-        public IHttpActionResult Put(Payor payor)
+        public IHttpActionResult Put(PayorDTO payor)
         {
             if (true)//TODO: replace this with validation logic ModelState.IsValid
             {

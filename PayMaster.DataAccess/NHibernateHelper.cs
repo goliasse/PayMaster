@@ -9,6 +9,7 @@ using FluentNHibernate.Conventions.Instances;
 using FluentNHibernate.Conventions.AcceptanceCriteria;
 using FluentNHibernate.Conventions.Inspections;
 using System;
+using System.Configuration;
 using System.Data.Entity.Design.PluralizationServices;
 using System.IO;
 using NHibernate.Tool.hbm2ddl;
@@ -47,6 +48,8 @@ namespace PayMaster.DataAccess
                 //})
                 //.ExposeConfiguration(cfg => new SchemaExport(cfg).Execute(true, true, false)) //this line creates the database tables in target db
                 .ExposeConfiguration(cfg => new SchemaUpdate(cfg).Execute(false, true)) //this line creates the database tables in target db
+                .ExposeConfiguration(x => x.SetProperty("current_session_context_class", "web"))
+                .CurrentSessionContext(ConfigurationManager.AppSettings["NinjectSessionContextClass"])
                 .BuildSessionFactory();
         }
         

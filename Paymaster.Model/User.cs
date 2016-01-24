@@ -10,8 +10,9 @@ namespace Paymaster.DataModel
         public virtual string UserName { get; set; }
         public virtual string Password { get; set; }
         public virtual bool Locked { get; set; }
-        public virtual string Sessionid { get; set; }
-        public virtual DateTime? Sessionstart { get; set; }
-        public virtual DateTime? Sessionend { get; set; }
+        public virtual string SessionId { get; set; }
+        public virtual DateTime? SessionStart { get; set; }
+        public virtual DateTime? SessionEnd { get; set; }
+        public virtual string Roles { get; set; }
     }
 }

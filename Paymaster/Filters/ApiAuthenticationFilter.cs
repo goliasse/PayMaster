@@ -1,4 +1,5 @@
 ﻿using Paymaster.BusinessServices.Interfaces;
+using System.Security.Principal;
 using System.Threading;
 using System.Web.Http.Controllers;
 
@@ -9,6 +10,8 @@ namespace Paymaster.Filters
     /// </summary>
     public class ApiAuthenticationFilter : GenericAuthenticationFilter
     {
+        
+
         /// <summary>
         /// Default Authentication Constructor
         /// </summary>
@@ -22,6 +25,15 @@ namespace Paymaster.Filters
         /// <param name="isActive"></param>
         public ApiAuthenticationFilter(bool isActive)
             : base(isActive)
+        {
+        }
+
+        /// <summary>
+        /// parameter roles allowed to access.
+        /// </summary>
+        /// <param name="roles"></param>
+        public ApiAuthenticationFilter(string roles)
+            :base(roles)
         {
         }
 
@@ -43,7 +55,14 @@ namespace Paymaster.Filters
                 {
                     var basicAuthenticationIdentity = Thread.CurrentPrincipal.Identity as BasicAuthenticationIdentity;
                     if (basicAuthenticationIdentity != null)
+                    {
                         basicAuthenticationIdentity.UserId = userId;
+                        var roles = provider.GetRoles(userId);
+                        if (roles!=null )
+                        {
+                            Thread.CurrentPrincipal = new GenericPrincipal(basicAuthenticationIdentity, roles);
+                        }
+                    }
                     return true;
                 }
             }
