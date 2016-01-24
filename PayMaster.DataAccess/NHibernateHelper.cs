@@ -12,6 +12,7 @@ using System;
 using System.Configuration;
 using System.Data.Entity.Design.PluralizationServices;
 using System.IO;
+using NHibernate.Context;
 using NHibernate.Tool.hbm2ddl;
 
 namespace PayMaster.DataAccess
@@ -23,7 +24,10 @@ namespace PayMaster.DataAccess
 
         public ISessionFactory SessionFactory
         {
-            get { return _sessionFactory ?? (_sessionFactory = CreateSessionFactory()); }
+            get
+            {
+                return _sessionFactory ?? (_sessionFactory = CreateSessionFactory<WebSessionContext>());
+            }
         }
 
         public NHibernateHelper(string connectionString)
@@ -31,15 +35,13 @@ namespace PayMaster.DataAccess
             _connectionString = connectionString;
         }
 
-        private ISessionFactory CreateSessionFactory()
+        private ISessionFactory CreateSessionFactory<T>() where T : ICurrentSessionContext
         {
             return Fluently.Configure()
                 .Database(MySQLConfiguration.Standard.ConnectionString(_connectionString))
                 .Mappings(m =>
-                m.FluentMappings.AddFromAssembly(Assembly.GetExecutingAssembly())
-                //m.FluentMappings.AddFromAssemblyOf<Employees>()
-                .Conventions.Add<TableNameConvention>()
-                //.Conventions.Add(Table.Is((t => t.TableName.ToLower())))
+                    m.FluentMappings.AddFromAssembly(Assembly.GetExecutingAssembly())
+                    .Conventions.Add<TableNameConvention>()
                 )
                 //.ExposeConfiguration(val =>
                 //{
@@ -49,18 +51,14 @@ namespace PayMaster.DataAccess
                 //.ExposeConfiguration(cfg => new SchemaExport(cfg).Execute(true, true, false)) //this line creates the database tables in target db
                 .ExposeConfiguration(cfg => new SchemaUpdate(cfg).Execute(false, true)) //this line creates the database tables in target db
                 .ExposeConfiguration(x => x.SetProperty("current_session_context_class", "web"))
-                .CurrentSessionContext(ConfigurationManager.AppSettings["NinjectSessionContextClass"])
+                //.CurrentSessionContext<T>()// (ConfigurationManager.AppSettings["NinjectSessionContextClass"])
                 .BuildSessionFactory();
         }
         
     }
 
-    public class TableNameConvention : IClassConvention//, IClassConventionAcceptance
+    public class TableNameConvention : IClassConvention
     {
-        //public void Accept(IAcceptanceCriteria<IClassInspector> criteria)
-        //{
-        //    criteria.Expect(x => x.TableName, Is.Not.Set);
-        //}
         public void Apply(IClassInstance instance)
         {
             string typeName = instance.EntityType.Name;

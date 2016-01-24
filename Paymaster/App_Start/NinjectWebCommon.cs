@@ -72,9 +72,6 @@ namespace Paymaster.App_Start
         {
             kernel.Load(new RepositoryModule());
             kernel.Load(new BusinessServiceModule());
-
-            GlobalConfiguration.Configuration.Filters.Add(kernel.Get<TransactionManagmentFilterAttribute>());
-
         }        
     }
 }

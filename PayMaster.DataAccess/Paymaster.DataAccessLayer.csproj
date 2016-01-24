@@ -56,7 +56,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Map\TokenMap.cs" />
-    <Compile Include="SessionExtensions.cs" />
     <Compile Include="TokenRepository.cs" />
     <Compile Include="Map\AddressMap.cs" />
     <Compile Include="Map\CheckMap.cs" />

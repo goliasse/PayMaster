@@ -46,7 +46,7 @@ namespace PayMaster.DataAccess
         {
             using (var transaction = _session.BeginTransaction())
             {//_session.Evict(entity);
-                _session.Update(entity);
+                _session.Merge(entity);
                 transaction.Commit();
             }
             return true;
