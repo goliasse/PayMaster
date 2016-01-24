@@ -5,6 +5,8 @@ using Paymaster.RepositoryInfrastucture;
 using System;
 using System.Configuration;
 using System.Linq;
+using FluentNHibernate.Automapping;
+using AutoMapper;
 
 namespace Paymaster.BusinessServices
 {
@@ -24,6 +26,8 @@ namespace Paymaster.BusinessServices
         public TokenService(ITokenRepository tokenRepository)
         {
             _tokenRepository = tokenRepository;
+            Mapper.CreateMap<Token, TokenEntity>();
+            Mapper.CreateMap<TokenEntity, Token >();
         }
 
         #endregion Public constructor.
@@ -51,16 +55,27 @@ namespace Paymaster.BusinessServices
             };
 
             _tokenRepository.Add(tokendomain);
-            //_unitOfWork.Commit();
-            var tokenModel = new TokenEntity()
-            {
-                UserId = userId,
-                IssuedOn = issuedOn,
-                ExpiresOn = expiredOn,
-                AuthToken = token
-            };
 
-            return tokenModel;
+            return Mapper.Map<TokenEntity>(tokendomain);
+            //var tokenModel = new TokenEntity()
+            //{
+            //    UserId = userId,
+            //    IssuedOn = issuedOn,
+            //    ExpiresOn = expiredOn,
+            //    AuthToken = token
+            //};
+            //return tokenModel;
+
+        }
+        /// <summary>
+        /// Method to fetch TokenEntity from database
+        /// </summary>
+        /// <param name="tokenId"></param>
+        /// <returns></returns>
+        public TokenEntity Get(string tokenId)
+        {
+            var token = _tokenRepository.FindBy(t => t.AuthToken == tokenId && t.ExpiresOn > DateTime.Now);
+            return token == null? null : Mapper.Map<TokenEntity>(token);
         }
 
         /// <summary>
@@ -73,14 +88,9 @@ namespace Paymaster.BusinessServices
             var token = _tokenRepository.FindBy(t => t.AuthToken == tokenId && t.ExpiresOn > DateTime.Now);
             if (token != null && !(DateTime.Now > token.ExpiresOn))
             {
-                //token.ExpiresOn = token.ExpiresOn.AddSeconds(
-                //                              Convert.ToDouble(ConfigurationManager.AppSettings["AuthTokenExpiry"]));
                 token.ExpiresOn = DateTime.Now.AddSeconds(
                                               Convert.ToDouble(ConfigurationManager.AppSettings["AuthTokenExpiry"]));
                 _tokenRepository.Update(token);
-                //_unitOfWork.Commit();
-                //_unitOfWork.TokenRepository.Update(token);
-                //_unitOfWork.Save();
                 return true;
             }
             return false;

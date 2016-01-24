@@ -13,6 +13,7 @@ namespace Paymaster.Controllers
     /// <summary>
     /// Provides API for authentication mechanism
     /// </summary>
+    [ApiAuthenticationFilter()]
     public class AuthenticateController : ApiController
     {
         #region Private variable.
@@ -38,9 +39,7 @@ namespace Paymaster.Controllers
         /// Authenticates user usign Basic Authentication(username/password in header) and returns token with expiry.
         /// </summary>
         /// <returns></returns>
-        [ApiAuthenticationFilter]
-        [HttpGet]
-        public HttpResponseMessage GetGenerateToken()
+        public HttpResponseMessage Get()
         {
             if (System.Threading.Thread.CurrentPrincipal != null && System.Threading.Thread.CurrentPrincipal.Identity.IsAuthenticated)
             {
@@ -52,51 +51,6 @@ namespace Paymaster.Controllers
                 }
             }
             return null;
-        }
-
-        /// <summary>
-        /// Authenticates user and returns token with expiry.
-        /// </summary>
-        /// <returns></returns>
-        [AllowAnonymous]
-        [Route("api/Authentication/Login")]
-        public HttpResponseMessage Post(LoginRequest loginRequest)
-        {
-            if (loginRequest != null)
-            {
-                var userId = _userService.Authenticate(loginRequest.Username, loginRequest.Password);
-                if (userId > 0)
-                {
-                    //TODO: the following code cane be removed when this methos works without any issue
-                    //var identity = new BasicAuthenticationIdentity(loginRequest.Username, loginRequest.Password);
-                    //var genericPrincipal = new GenericPrincipal(identity, null);
-                    //Thread.CurrentPrincipal = genericPrincipal;
-                    //var basicAuthenticationIdentity = Thread.CurrentPrincipal.Identity as BasicAuthenticationIdentity;
-                    //if (basicAuthenticationIdentity != null)
-                    //{
-                    //    basicAuthenticationIdentity.UserId = userId;
-                    //    return GetAuthToken(userId);
-                    //}
-                    return GetAuthToken(userId);
-                }
-            }
-            return null;
-        }
-
-        /// <summary>
-        /// Logout - logged in user
-        /// </summary>
-        /// <returns></returns>
-        [ApiAuthenticationFilter]
-        [Route("api/Authentication/Logout")]
-        public bool Post()
-        {
-            var basicAuthenticationIdentity = Thread.CurrentPrincipal.Identity as BasicAuthenticationIdentity;
-            if (basicAuthenticationIdentity != null)
-            {
-                return _tokenService.DeleteByUserId(basicAuthenticationIdentity.UserId);
-            }
-            return false;
         }
 
         /// <summary>

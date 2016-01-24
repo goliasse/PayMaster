@@ -15,6 +15,13 @@ namespace Paymaster.BusinessServices.Interfaces
         TokenEntity GenerateToken(int userId);
 
         /// <summary>
+        /// Function to fetch TokenEntity from database
+        /// </summary>
+        /// <param name="tokenId"></param>
+        /// <returns></returns>
+        TokenEntity Get(string tokenId);
+
+        /// <summary>
         /// Function to validate token againt expiry and existance in database.
         /// </summary>
         /// <param name="tokenId"></param>

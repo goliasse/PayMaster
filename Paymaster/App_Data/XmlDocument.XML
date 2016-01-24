@@ -552,21 +552,9 @@
             Public constructor to initialize product service instance
             </summary>
         </member>
-        <member name="M:Paymaster.Controllers.AuthenticateController.GetGenerateToken">
+        <member name="M:Paymaster.Controllers.AuthenticateController.Get">
             <summary>
             Authenticates user usign Basic Authentication(username/password in header) and returns token with expiry.
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:Paymaster.Controllers.AuthenticateController.Post(Paymaster.BusinessEntities.LoginRequest)">
-            <summary>
-            Authenticates user and returns token with expiry.
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:Paymaster.Controllers.AuthenticateController.Post">
-            <summary>
-            Logout - logged in user
             </summary>
             <returns></returns>
         </member>
