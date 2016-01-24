@@ -41,6 +41,16 @@ namespace Paymaster.BusinessServices
             return 0;
         }
 
+        public string[] GetRoles(int UserId)
+        {
+            var user = _userRepository.FindBy(t => t.Id == UserId);
+            if (user != null && !string.IsNullOrEmpty(user.Roles))
+            {
+                return user.Roles.Split(',');
+            }
+            return null;
+        }
+
 
         public IQueryable<User> All()
         {

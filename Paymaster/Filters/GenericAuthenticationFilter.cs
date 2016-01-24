@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Security.Principal;
@@ -24,6 +25,7 @@ namespace Paymaster.Filters
         }
 
         private readonly bool _isActive = true;
+        private readonly string[] _roles = null;
 
         /// <summary>
         /// parameter isActive explicitly enables/disables this filter.
@@ -33,6 +35,19 @@ namespace Paymaster.Filters
         {
             _isActive = isActive;
         }
+
+        /// <summary>
+        /// parameter roles allowed to access.
+        /// </summary>
+        /// <param name="roles"></param>
+        public GenericAuthenticationFilter(string roles)
+        {
+            if (!string.IsNullOrEmpty(roles.Trim()))
+            {
+                _roles = roles.Split(',').Select(t => t.Trim()).ToArray();
+            }
+        }
+
 
         /// <summary>
         /// Checks basic authentication request
@@ -54,6 +69,20 @@ namespace Paymaster.Filters
                 ChallengeAuthRequest(filterContext);
                 return;
             }
+            if (_roles != null)
+            {
+                var principal = Thread.CurrentPrincipal;
+                foreach (var role in _roles)
+                {
+                    if (!principal.IsInRole(role))
+                    {
+                        ChallengeAuthRequest(filterContext);
+                        return;
+                    }
+                }
+            }
+            
+
             base.OnAuthorization(filterContext);
         }
 

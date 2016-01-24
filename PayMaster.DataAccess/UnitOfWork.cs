@@ -16,23 +16,23 @@ namespace PayMaster.DataAccess
             _sessionFactory = sessionFactory;
             Session = _sessionFactory.OpenSession();
             Session.FlushMode = FlushMode.Auto;
-            _transaction = Session.BeginTransaction(IsolationLevel.ReadCommitted);
+            //_transaction = Session.BeginTransaction(IsolationLevel.ReadCommitted);
         }
 
         public void Dispose()
         {
             if (Session.IsOpen)
             {
-                Commit();//commit before disposing
+                //Commit();//commit before disposing
                 Session.Close();
             }
             Session = null;
         }
 
-        //public void BeginTransaction()
-        //{
-        //    _transaction = Session.BeginTransaction(IsolationLevel.ReadCommitted);
-        //}
+        public void BeginTransaction()
+        {
+            _transaction = Session.BeginTransaction(IsolationLevel.ReadCommitted);
+        }
 
         public void Commit()
         {

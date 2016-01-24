@@ -542,6 +542,11 @@
             <param name="id">record id</param>
             <returns></returns>
         </member>
+        <member name="T:Paymaster.Controllers.AuthenticateController">
+            <summary>
+            Provides API for authentication mechanism
+            </summary>
+        </member>
         <member name="M:Paymaster.Controllers.AuthenticateController.#ctor(Paymaster.BusinessServices.Interfaces.ITokenService,Paymaster.BusinessServices.Interfaces.IUserService)">
             <summary>
             Public constructor to initialize product service instance
@@ -653,14 +658,14 @@
             <param name="id">Id of the payor to be searched</param>
             <returns></returns>
         </member>
-        <member name="M:Paymaster.Controllers.PayorController.Post(Paymaster.DataModel.Payor)">
+        <member name="M:Paymaster.Controllers.PayorController.Post(Paymaster.BusinessEntities.PayorDTO)">
             <summary>
             Method to insert/save payor record
             </summary>
             <param name="payor">payor records to be inserted/saved</param>
             <returns></returns>
         </member>
-        <member name="M:Paymaster.Controllers.PayorController.Put(Paymaster.DataModel.Payor)">
+        <member name="M:Paymaster.Controllers.PayorController.Put(Paymaster.BusinessEntities.PayorDTO)">
             <summary>
             Method to insert/save payor record
             </summary>
@@ -827,6 +832,12 @@
             </summary>
             <param name="isActive"></param>
         </member>
+        <member name="M:Paymaster.Filters.ApiAuthenticationFilter.#ctor(System.String)">
+            <summary>
+            parameter roles allowed to access.
+            </summary>
+            <param name="roles"></param>
+        </member>
         <member name="M:Paymaster.Filters.ApiAuthenticationFilter.OnAuthorizeUser(System.String,System.String,System.Web.Http.Controllers.HttpActionContext)">
             <summary>
             Protected overriden method for authorizing user
@@ -878,6 +889,12 @@
             parameter isActive explicitly enables/disables this filter.
             </summary>
             <param name="isActive"></param>
+        </member>
+        <member name="M:Paymaster.Filters.GenericAuthenticationFilter.#ctor(System.String)">
+            <summary>
+            parameter roles allowed to access.
+            </summary>
+            <param name="roles"></param>
         </member>
         <member name="M:Paymaster.Filters.GenericAuthenticationFilter.OnAuthorization(System.Web.Http.Controllers.HttpActionContext)">
             <summary>

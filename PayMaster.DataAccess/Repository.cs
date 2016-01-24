@@ -12,7 +12,6 @@ namespace PayMaster.DataAccess
     public abstract class Repository<T> : IIntKeyedRepository<T> where T : class
     {
         private readonly ISession _session;
-
         public Repository(ISession session)
         {
             _session = session;
@@ -22,43 +21,69 @@ namespace PayMaster.DataAccess
 
         public virtual bool Add(T entity)
         {
-            _session.Save(entity);
+            using (var transaction = _session.BeginTransaction())
+            {
+                _session.Save(entity);
+                transaction.Commit();
+            }
             return true;
         }
 
         public virtual bool Add(IEnumerable<T> items)
         {
-            foreach (T item in items)
+            using (var transaction = _session.BeginTransaction())
             {
-                _session.Save(item);
+                foreach (T item in items)
+                {
+                    _session.Save(item);
+                }
+                transaction.Commit();
             }
             return true;
         }
 
         public virtual bool Update(T entity)
         {
-            _session.Update(entity);
+            using (var transaction = _session.BeginTransaction())
+            {//_session.Evict(entity);
+                _session.Merge(entity);
+                transaction.Commit();
+            }
             return true;
         }
 
         public virtual bool Delete(T entity)
         {
-            _session.Delete(entity);
+            using (var transaction = _session.BeginTransaction())
+            {
+                _session.Delete(entity);
+                transaction.Commit();
+            }
             return true;
         }
         public virtual bool Delete(Expression<System.Func<T, bool>> expression)
         {
-            var objects = All().Where(expression).AsQueryable();
-            foreach (var obj in objects)
-                _session.Delete(obj);
+            using (var transaction = _session.BeginTransaction())
+            {
+                var objects = All().Where(expression).AsQueryable();
+                foreach (var obj in objects)
+                {
+                    _session.Delete(obj);
+                }
+                transaction.Commit();
+            }
             return true;
         }
 
         public virtual bool Delete(IEnumerable<T> entities)
         {
-            foreach (T entity in entities)
+            using (var transaction = _session.BeginTransaction())
             {
-                _session.Delete(entity);
+                foreach (T entity in entities)
+                {
+                    _session.Delete(entity);
+                }
+                transaction.Commit();
             }
             return true;
         }
@@ -69,7 +94,10 @@ namespace PayMaster.DataAccess
 
         public virtual T FindBy(int id)
         {
-            return _session.Get<T>(id);
+            using (var transaction = _session.BeginTransaction())
+            {
+                return _session.Get<T>(id);
+            }
         }
 
         #endregion IIntKeyedRepository<T> Members
@@ -78,7 +106,10 @@ namespace PayMaster.DataAccess
 
         public virtual IQueryable<T> All()
         {
-            return _session.Query<T>();
+            using (var transaction = _session.BeginTransaction())
+            {
+                return _session.Query<T>();
+            }
         }
 
         //public virtual T FindBy(Expression<System.Func<T, bool>> expression)

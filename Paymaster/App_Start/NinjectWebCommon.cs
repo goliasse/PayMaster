@@ -1,5 +1,6 @@
 using System.Web.Http;
 using Ninject.Web.WebApi;
+using Paymaster.Filters;
 using PayMaster.DataAccess;
 
 [assembly: WebActivatorEx.PreApplicationStartMethod(typeof(Paymaster.App_Start.NinjectWebCommon), "Start")]
@@ -56,7 +57,7 @@ namespace Paymaster.App_Start
                 RegisterServices(kernel);
                 return kernel;
             }
-            catch
+            catch(Exception ex)
             {
                 kernel.Dispose();
                 throw;
@@ -71,7 +72,6 @@ namespace Paymaster.App_Start
         {
             kernel.Load(new RepositoryModule());
             kernel.Load(new BusinessServiceModule());
-            
         }        
     }
 }

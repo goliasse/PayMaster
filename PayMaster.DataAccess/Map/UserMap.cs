@@ -9,13 +9,14 @@ namespace PayMaster.DataAccess.Map
         public UserMap()
         {
             DefaultLazy.Always();
-            Id(x => x.Id);//, map => map.Generator(Generators.Assigned));
-            Map(x => x.UserName).Not.Nullable();//, map => map.NotNullable(true));
-            Map(x => x.Password).Not.Nullable();//, map => map.NotNullable(true));
+            Id(x => x.Id);
+            Map(x => x.UserName).Not.Nullable();
+            Map(x => x.Password).Not.Nullable();
             Map(x => x.Locked);
-            Map(x => x.Sessionid);
-            Map(x => x.Sessionstart);
-            Map(x => x.Sessionend);
+            Map(x => x.SessionId);
+            Map(x => x.SessionStart);
+            Map(x => x.SessionEnd);
+            Map(x => x.Roles);
             References(c => c.Payor, "payorId");
             //ManyToOne(x => x.Payors, map => { map.Column("payorID"); map.Cascade(Cascade.None); });
         }
