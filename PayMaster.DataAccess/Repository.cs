@@ -94,10 +94,10 @@ namespace PayMaster.DataAccess
 
         public virtual T FindBy(int id)
         {
-            using (var transaction = _session.BeginTransaction())
-            {
+            //using (var transaction = _session.BeginTransaction())
+            //{
                 return _session.Get<T>(id);
-            }
+            //}
         }
 
         #endregion IIntKeyedRepository<T> Members
@@ -106,10 +106,10 @@ namespace PayMaster.DataAccess
 
         public virtual IQueryable<T> All()
         {
-            using (var transaction = _session.BeginTransaction())
-            {
+            //using (var transaction = _session.BeginTransaction())
+            //{
                 return _session.Query<T>();
-            }
+            //}
         }
 
         //public virtual T FindBy(Expression<System.Func<T, bool>> expression)
