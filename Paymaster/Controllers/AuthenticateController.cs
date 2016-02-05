@@ -1,16 +1,11 @@
-﻿using Paymaster.BusinessServices.Interfaces;
-using Paymaster.Filters;
-using System.Configuration;
-using System.Net;
-using System.Net.Http;
-using System.Security.Principal;
-using System.Threading;
-using System.Web.Http;
-using Paymaster.BusinessEntities;
+﻿using Paymaster.BusinessEntities;
+using Paymaster.BusinessServices.Interfaces;
 using Paymaster.Security;
+using System.Net;
+using System.Web.Http;
 
 namespace Paymaster.Controllers
-{ 
+{
     /// <summary>
     /// Provides API for authentication mechanism
     /// </summary>
@@ -21,6 +16,7 @@ namespace Paymaster.Controllers
 
         private readonly ITokenService _tokenService;
         private readonly IUserSession _userSession;
+
         #endregion Private variable.
 
         #region Public Constructor
@@ -28,7 +24,7 @@ namespace Paymaster.Controllers
         /// <summary>
         /// Public constructor to initialize product service instance
         /// </summary>
-        public AuthenticateController(ITokenService tokenService,  IUserSession userSession)
+        public AuthenticateController(ITokenService tokenService, IUserSession userSession)
         {
             _tokenService = tokenService;
             _userSession = userSession;
@@ -58,6 +54,5 @@ namespace Paymaster.Controllers
         {
             _tokenService.Kill(_userSession.SessionToken);
         }
-        
     }
 }

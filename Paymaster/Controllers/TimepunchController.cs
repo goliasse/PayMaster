@@ -1,6 +1,6 @@
 ﻿using Paymaster.BusinessServices.Interfaces;
 using Paymaster.DataModel;
-using Paymaster.Filters;
+using Paymaster.Security;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -9,10 +9,12 @@ namespace Paymaster.Controllers
     public class TimePunchController : BaseApiController
     {
         private readonly ITimePunchService _timePunchService;
+        private readonly IUserSession _userSession;
 
-        public TimePunchController(ITimePunchService timePunchService)
+        public TimePunchController(ITimePunchService timePunchService, IUserSession userSession)
         {
             _timePunchService = timePunchService;
+            _userSession = userSession;
         }
 
         /// <summary>
@@ -21,11 +23,7 @@ namespace Paymaster.Controllers
         /// <returns></returns>
         public IEnumerable<TimePunch> Get()
         {
-            //TODO: to be fetched form loggedin user's ID
-            var loggedInuser = User.Identity as BasicAuthenticationIdentity;
-            if (loggedInuser != null)
-                return _timePunchService.All().Where(t => t.Employees.Id == loggedInuser.UserId).AsEnumerable();
-            return null;
+            return _timePunchService.All().Where(t => t.Employees.Id == _userSession.UserId).AsEnumerable();
         }
     }
 }
