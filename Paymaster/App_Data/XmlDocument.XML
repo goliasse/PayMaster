@@ -9,6 +9,25 @@
             Action filter to handle for Global application errors.
             </summary>
         </member>
+        <member name="M:Paymaster.App_Start.NinjectConfigurator.Configure(Ninject.IKernel)">
+            <summary>
+            This method is an entry point to NinjectConfigurator class 
+            </summary>
+            <param name="container">Standard Kernel Object of Ninject</param>
+        </member>
+        <member name="M:Paymaster.App_Start.NinjectConfigurator.AddBindings(Ninject.IKernel)">
+            <summary>
+            This method will either directly bind or call other configuration methods
+            </summary>
+            <param name="container">Standard Kernel Object of Ninject</param>
+        </member>
+        <member name="M:Paymaster.App_Start.NinjectConfigurator.CreateUserSession(Ninject.Activation.IContext)">
+            <summary>
+            Returns the IPrincipal object from current thread.
+            </summary>
+            <param name="arg">IContext</param>
+            <returns>User Session</returns>
+        </member>
         <member name="M:Paymaster.App_Start.NinjectWebCommon.Start">
             <summary>
             Starts the application
@@ -547,23 +566,22 @@
             Provides API for authentication mechanism
             </summary>
         </member>
-        <member name="M:Paymaster.Controllers.AuthenticateController.#ctor(Paymaster.BusinessServices.Interfaces.ITokenService,Paymaster.BusinessServices.Interfaces.IUserService)">
+        <member name="M:Paymaster.Controllers.AuthenticateController.#ctor(Paymaster.BusinessServices.Interfaces.ITokenService,Paymaster.Security.IUserSession)">
             <summary>
             Public constructor to initialize product service instance
             </summary>
         </member>
-        <member name="M:Paymaster.Controllers.AuthenticateController.Get">
+        <member name="M:Paymaster.Controllers.AuthenticateController.Login(Paymaster.BusinessEntities.LoginRequest)">
             <summary>
-            Authenticates user usign Basic Authentication(username/password in header) and returns token with expiry.
+            Login: Returns auth token for the validated user.
             </summary>
+            <param name="loginRequest"></param>
             <returns></returns>
         </member>
-        <member name="M:Paymaster.Controllers.AuthenticateController.GetAuthToken(System.Int32)">
+        <member name="M:Paymaster.Controllers.AuthenticateController.Logout">
             <summary>
-            Returns auth token for the validated user.
+            Logout : Invalidates the current session
             </summary>
-            <param name="userId"></param>
-            <returns></returns>
         </member>
         <member name="M:Paymaster.Controllers.EmailController.Get">
             <summary>
@@ -804,113 +822,20 @@
             ReasonPhrase
             </summary>
         </member>
-        <member name="T:Paymaster.Filters.ApiAuthenticationFilter">
+        <member name="T:Paymaster.Handler.OptionsHandler">
             <summary>
-            Custom Authentication Filter Extending basic Authentication
+            Handles Option calls
             </summary>
         </member>
-        <member name="M:Paymaster.Filters.ApiAuthenticationFilter.#ctor">
+        <member name="T:Paymaster.Handler.SessionTokenAuthenticationMessageHandler">
             <summary>
-            Default Authentication Constructor
+            Creating an Inner "Message" Handler of HTTP for processing of HTTP response ErrorMessages. 
+            This is used to intercept the calls to RESTFUL Web API Controllers and validate the credentials of the caller.
+            DelegatingHandler- it is an abstract class provided by Web API to allow easy implementation of message handler
+            http://www.asp.net/web-api/overview/security/authentication-and-authorization-in-aspnet-web-api
             </summary>
         </member>
-        <member name="M:Paymaster.Filters.ApiAuthenticationFilter.#ctor(System.Boolean)">
-            <summary>
-            AuthenticationFilter constructor with isActive parameter
-            </summary>
-            <param name="isActive"></param>
-        </member>
-        <member name="M:Paymaster.Filters.ApiAuthenticationFilter.#ctor(System.String)">
-            <summary>
-            parameter roles allowed to access.
-            </summary>
-            <param name="roles"></param>
-        </member>
-        <member name="M:Paymaster.Filters.ApiAuthenticationFilter.OnAuthorizeUser(System.String,System.String,System.Web.Http.Controllers.HttpActionContext)">
-            <summary>
-            Protected overriden method for authorizing user
-            </summary>
-            <param name="username"></param>
-            <param name="password"></param>
-            <param name="actionContext"></param>
-            <returns></returns>
-        </member>
-        <member name="T:Paymaster.Filters.BasicAuthenticationIdentity">
-            <summary>
-            Basic Authentication identity
-            </summary>
-        </member>
-        <member name="P:Paymaster.Filters.BasicAuthenticationIdentity.Password">
-            <summary>
-            Get/Set for password
-            </summary>
-        </member>
-        <member name="P:Paymaster.Filters.BasicAuthenticationIdentity.UserName">
-            <summary>
-            Get/Set for UserName
-            </summary>
-        </member>
-        <member name="P:Paymaster.Filters.BasicAuthenticationIdentity.UserId">
-            <summary>
-            Get/Set for UserId
-            </summary>
-        </member>
-        <member name="M:Paymaster.Filters.BasicAuthenticationIdentity.#ctor(System.String,System.String)">
-            <summary>
-            Basic Authentication Identity Constructor
-            </summary>
-            <param name="userName"></param>
-            <param name="password"></param>
-        </member>
-        <member name="T:Paymaster.Filters.GenericAuthenticationFilter">
-            <summary>
-            Generic basic Authentication filter.
-            </summary>
-        </member>
-        <member name="M:Paymaster.Filters.GenericAuthenticationFilter.#ctor">
-            <summary>
-            Public default Constructor
-            </summary>
-        </member>
-        <member name="M:Paymaster.Filters.GenericAuthenticationFilter.#ctor(System.Boolean)">
-            <summary>
-            parameter isActive explicitly enables/disables this filter.
-            </summary>
-            <param name="isActive"></param>
-        </member>
-        <member name="M:Paymaster.Filters.GenericAuthenticationFilter.#ctor(System.String)">
-            <summary>
-            parameter roles allowed to access.
-            </summary>
-            <param name="roles"></param>
-        </member>
-        <member name="M:Paymaster.Filters.GenericAuthenticationFilter.OnAuthorization(System.Web.Http.Controllers.HttpActionContext)">
-            <summary>
-            Checks basic authentication request
-            </summary>
-            <param name="filterContext"></param>
-        </member>
-        <member name="M:Paymaster.Filters.GenericAuthenticationFilter.OnAuthorizeUser(System.String,System.String,System.Web.Http.Controllers.HttpActionContext)">
-            <summary>
-            Virtual method.Can be overriden with the custom Authorization.
-            </summary>
-            <param name="user"></param>
-            <param name="pass"></param>
-            <param name="filterContext"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Paymaster.Filters.GenericAuthenticationFilter.FetchAuthHeader(System.Web.Http.Controllers.HttpActionContext)">
-            <summary>
-            Checks for autrhorization header in the request and parses it, creates user credentials and returns as BasicAuthenticationIdentity
-            </summary>
-            <param name="filterContext"></param>
-        </member>
-        <member name="M:Paymaster.Filters.GenericAuthenticationFilter.ChallengeAuthRequest(System.Web.Http.Controllers.HttpActionContext)">
-            <summary>
-            Send the Authentication Challenge request
-            </summary>
-            <param name="filterContext"></param>
-        </member>
+        <!-- Badly formed XML comment ignored for member "M:Paymaster.Handler.SessionTokenAuthenticationMessageHandler.SetPrincipal(Paymaster.DataModel.User,System.String,System.String[])" -->
         <member name="M:Paymaster.Helpers.Extensions.ToJSON(System.Object)">
             <summary>
             Extened method of object class

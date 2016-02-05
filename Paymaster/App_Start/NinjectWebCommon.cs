@@ -1,35 +1,32 @@
-using System.Web.Http;
 using Ninject.Web.WebApi;
-using Paymaster.Filters;
-using PayMaster.DataAccess;
+using Paymaster.Handler;
+using System.Web.Http;
 
 [assembly: WebActivatorEx.PreApplicationStartMethod(typeof(Paymaster.App_Start.NinjectWebCommon), "Start")]
 [assembly: WebActivatorEx.ApplicationShutdownMethodAttribute(typeof(Paymaster.App_Start.NinjectWebCommon), "Stop")]
 
 namespace Paymaster.App_Start
 {
+    using Microsoft.Web.Infrastructure.DynamicModuleHelper;
+    using Ninject;
+    using Ninject.Web.Common;
     using System;
     using System.Web;
 
-    using Microsoft.Web.Infrastructure.DynamicModuleHelper;
-
-    using Ninject;
-    using Ninject.Web.Common;
-
-    public static class NinjectWebCommon 
+    public static class NinjectWebCommon
     {
         private static readonly Bootstrapper bootstrapper = new Bootstrapper();
 
         /// <summary>
         /// Starts the application
         /// </summary>
-        public static void Start() 
+        public static void Start()
         {
             DynamicModuleUtility.RegisterModule(typeof(OnePerRequestHttpModule));
             DynamicModuleUtility.RegisterModule(typeof(NinjectHttpModule));
             bootstrapper.Initialize(CreateKernel);
         }
-        
+
         /// <summary>
         /// Stops the application.
         /// </summary>
@@ -37,7 +34,7 @@ namespace Paymaster.App_Start
         {
             bootstrapper.ShutDown();
         }
-        
+
         /// <summary>
         /// Creates the kernel that will manage your application.
         /// </summary>
@@ -45,7 +42,7 @@ namespace Paymaster.App_Start
         private static IKernel CreateKernel()
         {
             var kernel = new StandardKernel();
-
+            kernel.Settings.AllowNullInjection = true;
             var resolver = new NinjectDependencyResolver(kernel);
             GlobalConfiguration.Configuration.DependencyResolver = resolver;
 
@@ -57,7 +54,7 @@ namespace Paymaster.App_Start
                 RegisterServices(kernel);
                 return kernel;
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 kernel.Dispose();
                 throw;
@@ -70,8 +67,20 @@ namespace Paymaster.App_Start
         /// <param name="kernel">The kernel.</param>
         private static void RegisterServices(IKernel kernel)
         {
+            var containerConfigurator = new NinjectConfigurator();
+            containerConfigurator.Configure(kernel);
+            //Modules
             kernel.Load(new RepositoryModule());
             kernel.Load(new BusinessServiceModule());
-        }        
+
+            //Handlers
+            GlobalConfiguration.Configuration.MessageHandlers.Add(kernel.Get<OptionsHandler>());
+            GlobalConfiguration.Configuration.MessageHandlers.Add(kernel.Get<SessionTokenAuthenticationMessageHandler>());
+
+            //Filters
+            //GlobalConfiguration.Configuration.Filters.Add(kernel.Get<LoggingFilterAttribute>());
+            //GlobalConfiguration.Configuration.Filters.Add(kernel.Get<GlobalExceptionAttribute>());
+            GlobalConfiguration.Configuration.Filters.Add(new AuthorizeAttribute());
+        }
     }
 }

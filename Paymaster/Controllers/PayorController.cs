@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Paymaster.BusinessEntities;
 using Paymaster.BusinessServices.Interfaces;
 using Paymaster.DataModel;
 using System;
@@ -6,12 +7,10 @@ using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
-using Paymaster.BusinessEntities;
-using Paymaster.Filters;
 
 namespace Paymaster.Controllers
 {
-    [ApiAuthenticationFilter("admin")]
+    [Authorize(Roles = "Supervisor")]
     public class PayorController : BaseApiController
     {
         private readonly IPayorService _payorService;

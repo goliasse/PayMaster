@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using Paymaster.Helpers;
+using System;
 using System.Web.Http;
 using System.Web.Http.Controllers;
 using System.Web.Http.Filters;
 using System.Web.Http.Tracing;
-using Paymaster.Helpers;
 
 namespace Paymaster.ActionFilters
 {
