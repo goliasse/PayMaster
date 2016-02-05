@@ -1,26 +1,27 @@
-﻿using System;
+﻿using AutoMapper;
+using Paymaster.BusinessEntities;
+using Paymaster.BusinessServices.Interfaces;
+using Paymaster.DataModel;
+using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
-using AutoMapper;
-using NHibernate;
-using Paymaster.App_Start;
-using Paymaster.DBServices;
-using Paymaster.Model;
 
 namespace Paymaster.Controllers
 {
+    [Authorize(Roles = "Supervisor")]
     public class PayorController : BaseApiController
     {
-        private ISessionFactory _sessionFactory;
-        private PayorService _payorService;
-        
-        public PayorController()
+        private readonly IPayorService _payorService;
+
+        public PayorController(IPayorService payorService)
         {
-            _sessionFactory = DBPlumbing.CreateSessionFactory();
-            _payorService = new PayorService(_sessionFactory);
+            _payorService = payorService;
+
+            Mapper.CreateMap<PayorDTO, Payor>();
+            Mapper.CreateMap<Payor, PayorDTO>();
+            Mapper.CreateMap<List<Payor>, List<PayorDTO>>();
         }
 
         // GET: api/Payor
@@ -28,9 +29,9 @@ namespace Paymaster.Controllers
         /// List all payor
         /// </summary>
         /// <returns></returns>
-        public IEnumerable<Payors> Get()
+        public IEnumerable<PayorDTO> Get()
         {
-            return _payorService.GetAll().AsEnumerable();
+            return Mapper.Map<IEnumerable<PayorDTO>>(_payorService.All());
         }
 
         // GET: api/Payor/id
@@ -41,12 +42,13 @@ namespace Paymaster.Controllers
         /// <returns></returns>
         public IHttpActionResult Get(int id)
         {
-            var payor = _payorService.FindById(id);
+            //check for ID validation
+            var payor = _payorService.FindBy(t => t.Id == id);
             if (payor == null)
             {
                 return NotFound();
             }
-            return Ok(payor);
+            return Ok(Mapper.Map<PayorDTO>(payor));
         }
 
         /// <summary>
@@ -54,14 +56,24 @@ namespace Paymaster.Controllers
         /// </summary>
         /// <param name="payor">payor records to be inserted/saved</param>
         /// <returns></returns>
-        public HttpResponseMessage Post(Payors payor)
+        public HttpResponseMessage Post(PayorDTO payorDTO)
         {
             if (true)//TODO: replace this with validation logic ModelState.IsValid
             {
-                _payorService.Save(payor);
+                //try
+                //{
+                var payor = Mapper.Map<Payor>(payorDTO);
+                _payorService.Add(payor);
+                //_unitOfWork.Commit();
                 HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.Created, payor);
                 response.Headers.Location = new Uri(Url.Link("DefaultApi", new { id = payor.Id }));
                 return response;
+                //}
+                //catch (Exception ex)
+                //{
+                //    _unitOfWork.Rollback();
+                //    return Request.CreateResponse(HttpStatusCode.BadRequest);
+                //}
             }
             else
             {
@@ -75,17 +87,18 @@ namespace Paymaster.Controllers
         /// </summary>
         /// <param name="payor">payor records to be updated</param>
         /// <returns></returns>
-        public IHttpActionResult Put(Payors payor)
+        public IHttpActionResult Put(PayorDTO payor)
         {
             if (true)//TODO: replace this with validation logic ModelState.IsValid
             {
-                var searchedPayor = _payorService.FindById(payor.Id);
+                var searchedPayor = _payorService.FindBy(t => t.Id == payor.Id);
                 if (payor == null)
                 {
                     return BadRequest("Cannot update payor/payor not found");
                 }
-                var toBeUpdatedRecord = Mapper.Map<Payors>(payor);
+                var toBeUpdatedRecord = Mapper.Map<Payor>(payor);
                 _payorService.Update(toBeUpdatedRecord);
+                //_unitOfWork.Commit();
                 return Ok();
             }
             else
@@ -101,19 +114,14 @@ namespace Paymaster.Controllers
         /// <returns></returns>
         public IHttpActionResult Delete(int id)
         {
-            try
+            var employee = _payorService.FindBy(t => t.Id == id);
+            if (employee == null)
             {
-                var employee = _payorService.FindById(id);
-                if (employee == null)
-                {
-                    return NotFound();
-                }
-                _payorService.Delete(employee);
+                return NotFound();
             }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
+            _payorService.Delete(employee);
+            //_unitOfWork.Commit();
+
             return Ok();
         }
     }

@@ -1,35 +1,31 @@
-﻿using System;
+﻿using AutoMapper;
+using Paymaster.BusinessServices.Interfaces;
+using Paymaster.DataModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
-using AutoMapper;
-using NHibernate;
-using Paymaster.App_Start;
-using Paymaster.DBServices;
-using Paymaster.Model;
 
 namespace Paymaster.Controllers
 {
     public class PhoneController : BaseApiController
     {
-        private ISessionFactory _sessionFactory;
-        private PhoneService _phoneService;
+        private readonly IPhoneService _phoneService;
 
-        public PhoneController()
+        public PhoneController(IPhoneService phoneService)
         {
-            _sessionFactory = DBPlumbing.CreateSessionFactory();
-            _phoneService = new PhoneService(_sessionFactory);
+            _phoneService = phoneService;
         }
 
         /// <summary>
         /// List all phone
         /// </summary>
         /// <returns></returns>
-        public IEnumerable<Phones> Get()
+        public IEnumerable<Phone> Get()
         {
-            return _phoneService.GetAll().AsEnumerable();
+            return _phoneService.All().AsEnumerable();
         }
 
         /// <summary>
@@ -39,7 +35,7 @@ namespace Paymaster.Controllers
         /// <returns></returns>
         public IHttpActionResult Get(int id)
         {
-            var record = _phoneService.FindById(id);
+            var record = _phoneService.FindBy(t => t.Id == id);
             if (record == null)
             {
                 return NotFound();
@@ -52,11 +48,11 @@ namespace Paymaster.Controllers
         /// </summary>
         /// <param name="email">phone records to be inserted/saved</param>
         /// <returns></returns>
-        public HttpResponseMessage Post(Phones phone)
+        public HttpResponseMessage Post(Phone phone)
         {
             if (true)//TODO: replace this with validation logic ModelState.IsValid
             {
-                _phoneService.Save(phone);
+                _phoneService.Add(phone);
                 HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.Created, phone);
                 response.Headers.Location = new Uri(Url.Link("DefaultApi", new { id = phone.Id }));
                 return response;
@@ -72,16 +68,16 @@ namespace Paymaster.Controllers
         /// </summary>
         /// <param name="email">phone to be updated</param>
         /// <returns></returns>
-        public IHttpActionResult Put(Phones phone)
+        public IHttpActionResult Put(Phone phone)
         {
             if (true)//TODO: replace this with validation logic ModelState.IsValid
             {
-                var searchedRecord = _phoneService.FindById(phone.Id);
+                var searchedRecord = _phoneService.FindBy(t => t.Id == phone.Id);
                 if (phone == null)
                 {
                     return BadRequest("Cannot update phone/ phone not found");
                 }
-                var toBeUpdatedRecord = Mapper.Map<Phones>(phone);
+                var toBeUpdatedRecord = Mapper.Map<Phone>(phone);
                 _phoneService.Update(toBeUpdatedRecord);
                 return Ok();
             }
@@ -100,7 +96,7 @@ namespace Paymaster.Controllers
         {
             try
             {
-                var employee = _phoneService.FindById(id);
+                var employee = _phoneService.FindBy(t => t.Id == id);
                 if (employee == null)
                 {
                     return NotFound();

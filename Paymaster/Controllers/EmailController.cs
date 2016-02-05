@@ -1,35 +1,31 @@
-﻿using System;
+﻿using AutoMapper;
+using Paymaster.BusinessServices.Interfaces;
+using Paymaster.DataModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
-using AutoMapper;
-using NHibernate;
-using Paymaster.App_Start;
-using Paymaster.DBServices;
-using Paymaster.Model;
 
 namespace Paymaster.Controllers
 {
     public class EmailController : BaseApiController
     {
-        private ISessionFactory _sessionFactory;
-        private EmailService _emailService;
+        private readonly IEmailService _emailService;
 
-        public EmailController()
+        public EmailController(IEmailService emailService)
         {
-            _sessionFactory = DBPlumbing.CreateSessionFactory();
-            _emailService = new EmailService(_sessionFactory);
+            _emailService = emailService;
         }
 
         /// <summary>
         /// List all Emails
         /// </summary>
         /// <returns></returns>
-        public IEnumerable<Emails> Get()
+        public IEnumerable<Email> Get()
         {
-            return _emailService.GetAll().AsEnumerable();
+            return _emailService.All().AsEnumerable();
         }
 
         /// <summary>
@@ -39,7 +35,7 @@ namespace Paymaster.Controllers
         /// <returns></returns>
         public IHttpActionResult Get(int id)
         {
-            var record = _emailService.FindById(id);
+            var record = _emailService.FindBy(t => t.Id == id);
             if (record == null)
             {
                 return NotFound();
@@ -52,11 +48,11 @@ namespace Paymaster.Controllers
         /// </summary>
         /// <param name="email">email records to be inserted/saved</param>
         /// <returns></returns>
-        public HttpResponseMessage Post(Emails email)
+        public HttpResponseMessage Post(Email email)
         {
             if (true)//TODO: replace this with validation logic ModelState.IsValid
             {
-                _emailService.Save(email);
+                _emailService.Add(email);
                 HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.Created, email);
                 response.Headers.Location = new Uri(Url.Link("DefaultApi", new { id = email.Id }));
                 return response;
@@ -72,16 +68,16 @@ namespace Paymaster.Controllers
         /// </summary>
         /// <param name="email">email to be updated</param>
         /// <returns></returns>
-        public IHttpActionResult Put(Emails email)
+        public IHttpActionResult Put(Email email)
         {
             if (true)//TODO: replace this with validation logic ModelState.IsValid
             {
-                var searchedRecord = _emailService.FindById(email.Id);
+                var searchedRecord = _emailService.FindBy(t => t.Id == email.Id);
                 if (email == null)
                 {
                     return BadRequest("Cannot update email/ email not found");
                 }
-                var toBeUpdatedRecord = Mapper.Map<Emails>(email);
+                var toBeUpdatedRecord = Mapper.Map<Email>(email);
                 _emailService.Update(toBeUpdatedRecord);
                 return Ok();
             }
@@ -100,7 +96,7 @@ namespace Paymaster.Controllers
         {
             try
             {
-                var employee = _emailService.FindById(id);
+                var employee = _emailService.FindBy(t => t.Id == id);
                 if (employee == null)
                 {
                     return NotFound();

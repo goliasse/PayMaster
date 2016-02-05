@@ -1,4 +1,4 @@
-﻿namespace Paymaster.Model
+﻿namespace Paymaster.DataModel
 {
     public enum FilingStatus
     {

@@ -1,52 +1,47 @@
-﻿using System;
+﻿using AutoMapper;
+using Paymaster.BusinessEntities;
+using Paymaster.BusinessServices.Interfaces;
+using Paymaster.DataModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
-using AutoMapper;
-using NHibernate;
-using Paymaster.App_Start;
-using Paymaster.DBServices;
-using Paymaster.Model;
-using Paymaster.Models;
 
 namespace Paymaster.Controllers
 {
-
     public class AddressController : BaseApiController
     {
-        private ISessionFactory _sessionFactory;
-        private AddressService _addressService;
-        private EmployeeService _employeeService;
+        private readonly IAddressService _addressService;
+        private readonly IEmployeeService _employeeService;
 
-        public AddressController()
+        public AddressController(IAddressService addressService, IEmployeeService employeeService)
         {
-            _sessionFactory = DBPlumbing.CreateSessionFactory();
-            _addressService = new AddressService(_sessionFactory);
-            _employeeService = new EmployeeService(_sessionFactory);
+            _addressService = addressService;
+            _employeeService = employeeService;
 
-            Mapper.CreateMap<AddressDTO, Addresses>()
+            Mapper.CreateMap<AddressDTO, Address>()
                .AfterMap(
-                   (src, dest) => dest.Employees = _employeeService.FindById(src.EmployeesId)
+                   (src, dest) => dest.Employees = _employeeService.FindBy(t => t.Id == src.EmployeesId)
                );
-            Mapper.CreateMap<Addresses, AddressDTO>()
+            Mapper.CreateMap<Address, AddressDTO>()
                 .AfterMap(
                     (src, dest) => dest.EmployeesId = src.Employees.Id
                 );
 
-            Mapper.CreateMap<List<Addresses>, List<AddressDTO>>();
+            Mapper.CreateMap<List<Address>, List<AddressDTO>>();
         }
-        
+
         /// <summary>
         /// List all Address
         /// </summary>
         /// <returns></returns>
         public IEnumerable<AddressDTO> Get()
         {
-            return Mapper.Map<IEnumerable<AddressDTO>>(_addressService.GetAll().AsEnumerable());
+            return Mapper.Map<IEnumerable<AddressDTO>>(_addressService.All().AsEnumerable());
         }
-        
+
         /// <summary>
         /// Get Address by address Id
         /// </summary>
@@ -54,7 +49,7 @@ namespace Paymaster.Controllers
         /// <returns></returns>
         public IHttpActionResult Get(int id)
         {
-            var record = _addressService.FindById(id);
+            var record = _addressService.FindBy(t => t.Id == id);
             if (record == null)
             {
                 return NotFound();
@@ -71,8 +66,8 @@ namespace Paymaster.Controllers
         {
             if (true)//TODO: replace this with validation logic ModelState.IsValid
             {
-                  var record = Mapper.Map<Addresses>(addressDto);
-                _addressService.Save(record);
+                var record = Mapper.Map<Address>(addressDto);
+                _addressService.Add(record);
                 HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.Created, addressDto);
                 response.Headers.Location = new Uri(Url.Link("DefaultApi", new { id = addressDto.Id }));
                 return response;
@@ -82,7 +77,7 @@ namespace Paymaster.Controllers
                 return Request.CreateResponse(HttpStatusCode.BadRequest);
             }
         }
-        
+
         /// <summary>
         /// Method to insert/save Address
         /// </summary>
@@ -92,12 +87,12 @@ namespace Paymaster.Controllers
         {
             if (true)//TODO: replace this with validation logic ModelState.IsValid
             {
-                var searchedPayor = _addressService.FindById(address.Id);
+                var searchedPayor = _addressService.FindBy(t => t.Id == address.Id);
                 if (address == null)
-                {   
+                {
                     return BadRequest("Cannot update payor/payor not found");
                 }
-                var toBeUpdatedRecord = Mapper.Map<Addresses>(address);
+                var toBeUpdatedRecord = Mapper.Map<Address>(address);
                 _addressService.Update(toBeUpdatedRecord);
                 return Ok();
             }
@@ -116,7 +111,7 @@ namespace Paymaster.Controllers
         {
             try
             {
-                var employee = _addressService.FindById(id);
+                var employee = _addressService.FindBy(t => t.Id == id);
                 if (employee == null)
                 {
                     return NotFound();

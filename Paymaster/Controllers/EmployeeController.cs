@@ -1,46 +1,37 @@
-﻿using System;
+﻿using AutoMapper;
+using Paymaster.BusinessEntities;
+using Paymaster.BusinessServices.Interfaces;
+using Paymaster.DataModel;
+using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
-using AutoMapper;
-using NHibernate;
-using Paymaster.Model;
-using Paymaster.App_Start;
-using Paymaster.DBServices;
-using Paymaster.Models;
 
 namespace Paymaster.Controllers
 {
     public class EmployeeController : BaseApiController
     {
-        private ISessionFactory _sessionFactory;
-        private EmployeeService _employeeService;
+        private readonly IPayorService _payorService;
+        private readonly IEmployeeService _employeeService;
 
-        private PayorService _payorService;
-
-        public EmployeeController()
+        public EmployeeController(IPayorService payorService, IEmployeeService employeeService)
         {
-            _sessionFactory = DBPlumbing.CreateSessionFactory();
-            _employeeService = new EmployeeService(_sessionFactory);
-            _payorService = new PayorService(_sessionFactory);
-            //Mapper.CreateMap<Employees, EmployeeDTO>();
-            Mapper.CreateMap<EmployeeDTO, Employees>()
-                .AfterMap(
-                    (src, dest) => dest.Payors = _payorService.FindById(src.PayorId)
-                );
-            Mapper.CreateMap<Employees,EmployeeDTO >()
+            _payorService = payorService;
+            _employeeService = employeeService;
+
+            Mapper.CreateMap<EmployeeDTO, Employee>()
+               .AfterMap(
+                   (src, dest) => dest.Payors = _payorService.FindBy(t => t.Id == src.PayorId)
+               );
+            Mapper.CreateMap<Employee, EmployeeDTO>()
                 .AfterMap(
                     (src, dest) => dest.PayorId = src.Payors.Id
                 );
 
-            Mapper.CreateMap<List<Employees>, List<EmployeeDTO>>();
-            //.AfterMap(
-            //    (src, dest) => Mapper.Map<Employees, EmployeeDTO>(src)
-            //);
-
+            Mapper.CreateMap<List<Employee>, List<EmployeeDTO>>();
         }
+
         // GET: api/Employee
         /// <summary>
         /// List all employees
@@ -48,25 +39,24 @@ namespace Paymaster.Controllers
         /// <returns></returns>
         public IEnumerable<EmployeeDTO> Get()
         {
-            return Mapper.Map<IEnumerable<EmployeeDTO>>(_employeeService.GetAll());
+            return Mapper.Map<IEnumerable<EmployeeDTO>>(_employeeService.All());
         }
 
         // GET: api/Employee/5
         /// <summary>
         /// Get employee by employee Id
         /// </summary>
-        /// <param name="id">Id of the employee to be searched: Guid/UUID</param>
+        /// <param name="id">Id of the employee to be searched</param>
         /// <returns></returns>
         public IHttpActionResult Get(int id)
         {
-            var employee = _employeeService.FindById(id);
+            var employee = _employeeService.FindBy(t => t.Id == id);
             if (employee == null)
             {
                 return NotFound();
             }
             return Ok(Mapper.Map<EmployeeDTO>(employee));
         }
-        
 
         // POST: api/Employee
         /// <summary>
@@ -78,9 +68,8 @@ namespace Paymaster.Controllers
         {
             if (true)//TODO: replace this with validation logic ModelState.IsValid
             {
-
-               var employee =  Mapper.Map<Employees>(employeeDTO);
-                _employeeService.Save(employee);
+                var employee = Mapper.Map<Employee>(employeeDTO);
+                _employeeService.Add(employee);
                 HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.Created, employee);
                 response.Headers.Location = new Uri(Url.Link("DefaultApi", new { id = employee.Id }));
                 return response;
@@ -90,7 +79,7 @@ namespace Paymaster.Controllers
                 return Request.CreateResponse(HttpStatusCode.BadRequest);
             }
         }
-        
+
         /// <summary>
         /// Method to update employee
         /// </summary>
@@ -100,12 +89,12 @@ namespace Paymaster.Controllers
         {
             if (true)//TODO: replace this with validation logic ModelState.IsValid
             {
-                var searchedEmployee = _employeeService.FindById(value.Id);
+                var searchedEmployee = _employeeService.FindBy(t => t.Id == value.Id);
                 if (value == null)
                 {
-                    return BadRequest("Cannot update employee not found");
+                    return BadRequest("Cannot update employee/Employee not found");
                 }
-                var toBeUpdatedRecord = Mapper.Map<Employees>(value);
+                var toBeUpdatedRecord = Mapper.Map<Employee>(value);
                 _employeeService.Update(toBeUpdatedRecord);
                 return Ok();
             }
@@ -124,12 +113,12 @@ namespace Paymaster.Controllers
         {
             try
             {
-                var employee = _employeeService.FindById(id);
+                var employee = _employeeService.FindBy(t => t.Id == id);
                 if (employee == null)
                 {
                     return NotFound();
                 }
-                _employeeService.SoftDelete(employee);
+                _employeeService.Delete(employee);
                 //_employeeService.Delete(employee);
             }
             catch (Exception ex)

@@ -1,35 +1,28 @@
-﻿using System;
+﻿using AutoMapper;
+using Paymaster.BusinessEntities;
+using Paymaster.BusinessServices.Interfaces;
+using Paymaster.DataModel;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net;
-using System.Net.Http;
-using System.Web.Http;
-using AutoMapper;
-using NHibernate;
-using Paymaster.App_Start;
-using Paymaster.DBServices;
-using Paymaster.Model;
-using Paymaster.Models;
 
 namespace Paymaster.Controllers
 {
     public class SearchController : BaseApiController
     {
-        private ISessionFactory _sessionFactory;
-        private EmployeeService _employeeService;
+        private readonly IEmployeeService _employeeService;
 
-        public SearchController()
+        public SearchController(IEmployeeService employeeService)
         {
-            _sessionFactory = DBPlumbing.CreateSessionFactory();
-            _employeeService = new EmployeeService(_sessionFactory);
+            _employeeService = employeeService;
 
-            Mapper.CreateMap<Employees, EmployeeDTO>()
+            Mapper.CreateMap<Employee, EmployeeDTO>()
                 .AfterMap(
                     (src, dest) => dest.PayorId = src.Payors.Id
                 );
 
-            Mapper.CreateMap<List<Employees>, List<EmployeeDTO>>();
+            Mapper.CreateMap<List<Employee>, List<EmployeeDTO>>();
         }
+
         /// <summary>
         /// Method to insert/save phone record
         /// </summary>
@@ -39,7 +32,8 @@ namespace Paymaster.Controllers
         {
             if (true)//TODO: replace this with validation logic ModelState.IsValid
             {
-                var allEmployee = _employeeService.GetAll();
+                //TODO: change _employeeService.All(); with _employeeService.FilterBy(expr);
+                var allEmployee = _employeeService.All();
                 if (allEmployee.Any())
                 {
                     var list = allEmployee.Where(t => (

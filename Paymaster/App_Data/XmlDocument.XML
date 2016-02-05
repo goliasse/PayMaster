@@ -4,6 +4,52 @@
         <name>Paymaster</name>
     </assembly>
     <members>
+        <member name="T:Paymaster.ActionFilters.GlobalExceptionAttribute">
+            <summary>
+            Action filter to handle for Global application errors.
+            </summary>
+        </member>
+        <member name="M:Paymaster.App_Start.NinjectConfigurator.Configure(Ninject.IKernel)">
+            <summary>
+            This method is an entry point to NinjectConfigurator class 
+            </summary>
+            <param name="container">Standard Kernel Object of Ninject</param>
+        </member>
+        <member name="M:Paymaster.App_Start.NinjectConfigurator.AddBindings(Ninject.IKernel)">
+            <summary>
+            This method will either directly bind or call other configuration methods
+            </summary>
+            <param name="container">Standard Kernel Object of Ninject</param>
+        </member>
+        <member name="M:Paymaster.App_Start.NinjectConfigurator.CreateUserSession(Ninject.Activation.IContext)">
+            <summary>
+            Returns the IPrincipal object from current thread.
+            </summary>
+            <param name="arg">IContext</param>
+            <returns>User Session</returns>
+        </member>
+        <member name="M:Paymaster.App_Start.NinjectWebCommon.Start">
+            <summary>
+            Starts the application
+            </summary>
+        </member>
+        <member name="M:Paymaster.App_Start.NinjectWebCommon.Stop">
+            <summary>
+            Stops the application.
+            </summary>
+        </member>
+        <member name="M:Paymaster.App_Start.NinjectWebCommon.CreateKernel">
+            <summary>
+            Creates the kernel that will manage your application.
+            </summary>
+            <returns>The created kernel.</returns>
+        </member>
+        <member name="M:Paymaster.App_Start.NinjectWebCommon.RegisterServices(Ninject.IKernel)">
+            <summary>
+            Load your modules or register your services here!
+            </summary>
+            <param name="kernel">The kernel.</param>
+        </member>
         <member name="M:Paymaster.Areas.HelpPage.ApiDescriptionExtensions.GetFriendlyId(System.Web.Http.Description.ApiDescription)">
             <summary>
             Generates an URI-friendly ID for the <see cref="T:System.Web.Http.Description.ApiDescription"/>. E.g. "Get-Values-id_name" instead of "GetValues/{id}?name={name}"
@@ -494,14 +540,14 @@
             <param name="id">Id of the payor to be searched</param>
             <returns></returns>
         </member>
-        <member name="M:Paymaster.Controllers.AddressController.Post(Paymaster.Models.AddressDTO)">
+        <member name="M:Paymaster.Controllers.AddressController.Post(Paymaster.BusinessEntities.AddressDTO)">
             <summary>
             Method to insert/save payor record
             </summary>
             <param name="addressDto">address records to be inserted/saved</param>
             <returns></returns>
         </member>
-        <member name="M:Paymaster.Controllers.AddressController.Put(Paymaster.Models.AddressDTO)">
+        <member name="M:Paymaster.Controllers.AddressController.Put(Paymaster.BusinessEntities.AddressDTO)">
             <summary>
             Method to insert/save Address
             </summary>
@@ -514,6 +560,28 @@
             </summary>
             <param name="id">record id</param>
             <returns></returns>
+        </member>
+        <member name="T:Paymaster.Controllers.AuthenticateController">
+            <summary>
+            Provides API for authentication mechanism
+            </summary>
+        </member>
+        <member name="M:Paymaster.Controllers.AuthenticateController.#ctor(Paymaster.BusinessServices.Interfaces.ITokenService,Paymaster.Security.IUserSession)">
+            <summary>
+            Public constructor to initialize product service instance
+            </summary>
+        </member>
+        <member name="M:Paymaster.Controllers.AuthenticateController.Login(Paymaster.BusinessEntities.LoginRequest)">
+            <summary>
+            Login: Returns auth token for the validated user.
+            </summary>
+            <param name="loginRequest"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Paymaster.Controllers.AuthenticateController.Logout">
+            <summary>
+            Logout : Invalidates the current session
+            </summary>
         </member>
         <member name="M:Paymaster.Controllers.EmailController.Get">
             <summary>
@@ -528,14 +596,14 @@
             <param name="id">Id of the email to be searched</param>
             <returns></returns>
         </member>
-        <member name="M:Paymaster.Controllers.EmailController.Post(Paymaster.Model.Emails)">
+        <member name="M:Paymaster.Controllers.EmailController.Post(Paymaster.DataModel.Email)">
             <summary>
             Method to insert/save email record
             </summary>
             <param name="email">email records to be inserted/saved</param>
             <returns></returns>
         </member>
-        <member name="M:Paymaster.Controllers.EmailController.Put(Paymaster.Model.Emails)">
+        <member name="M:Paymaster.Controllers.EmailController.Put(Paymaster.DataModel.Email)">
             <summary>
             Method to update Email
             </summary>
@@ -559,17 +627,17 @@
             <summary>
             Get employee by employee Id
             </summary>
-            <param name="id">Id of the employee to be searched: Guid/UUID</param>
+            <param name="id">Id of the employee to be searched</param>
             <returns></returns>
         </member>
-        <member name="M:Paymaster.Controllers.EmployeeController.Post(Paymaster.Models.EmployeeDTO)">
+        <member name="M:Paymaster.Controllers.EmployeeController.Post(Paymaster.BusinessEntities.EmployeeDTO)">
             <summary>
             Method to insert/save employee record
             </summary>
             <param name="employee">Employee records to be inserted/saved</param>
             <returns></returns>
         </member>
-        <member name="M:Paymaster.Controllers.EmployeeController.Put(Paymaster.Models.EmployeeDTO)">
+        <member name="M:Paymaster.Controllers.EmployeeController.Put(Paymaster.BusinessEntities.EmployeeDTO)">
             <summary>
             Method to update employee
             </summary>
@@ -596,14 +664,14 @@
             <param name="id">Id of the payor to be searched</param>
             <returns></returns>
         </member>
-        <member name="M:Paymaster.Controllers.PayorController.Post(Paymaster.Model.Payors)">
+        <member name="M:Paymaster.Controllers.PayorController.Post(Paymaster.BusinessEntities.PayorDTO)">
             <summary>
             Method to insert/save payor record
             </summary>
             <param name="payor">payor records to be inserted/saved</param>
             <returns></returns>
         </member>
-        <member name="M:Paymaster.Controllers.PayorController.Put(Paymaster.Model.Payors)">
+        <member name="M:Paymaster.Controllers.PayorController.Put(Paymaster.BusinessEntities.PayorDTO)">
             <summary>
             Method to insert/save payor record
             </summary>
@@ -630,14 +698,14 @@
             <param name="id">Id of the phone to be searched</param>
             <returns></returns>
         </member>
-        <member name="M:Paymaster.Controllers.PhoneController.Post(Paymaster.Model.Phones)">
+        <member name="M:Paymaster.Controllers.PhoneController.Post(Paymaster.DataModel.Phone)">
             <summary>
             Method to insert/save phone record
             </summary>
             <param name="email">phone records to be inserted/saved</param>
             <returns></returns>
         </member>
-        <member name="M:Paymaster.Controllers.PhoneController.Put(Paymaster.Model.Phones)">
+        <member name="M:Paymaster.Controllers.PhoneController.Put(Paymaster.DataModel.Phone)">
             <summary>
             Method to update phone
             </summary>
@@ -651,12 +719,175 @@
             <param name="id">record id</param>
             <returns></returns>
         </member>
-        <member name="M:Paymaster.Controllers.SearchController.Post(Paymaster.Models.EmployeeSearchDTO)">
+        <member name="M:Paymaster.Controllers.SearchController.Post(Paymaster.BusinessEntities.EmployeeSearchDTO)">
             <summary>
             Method to insert/save phone record
             </summary>
             <param name="email">phone records to be inserted/saved</param>
             <returns></returns>
+        </member>
+        <member name="M:Paymaster.Controllers.TimePunchController.Get">
+            <summary>
+            List all Address
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Paymaster.Controllers.UserController.Get">
+            <summary>
+            List all Users
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Paymaster.Controllers.UserController.Get(System.Int32)">
+            <summary>
+            Get Users by User's Id
+            </summary>
+            <param name="id">Id of the user to be searched</param>
+            <returns></returns>
+        </member>
+        <member name="M:Paymaster.Controllers.UserController.Post(Paymaster.BusinessEntities.UserInputDTO)">
+            <summary>
+            Method to insert/save User record
+            </summary>
+            <param name="user">User records to be inserted/saved</param>
+            <returns></returns>
+        </member>
+        <member name="M:Paymaster.Controllers.UserController.Put(Paymaster.BusinessEntities.UserInputDTO)">
+            <summary>
+            Method to update user
+            </summary>
+            <param name="user">Users record to be updated</param>
+            <returns></returns>
+        </member>
+        <member name="M:Paymaster.Controllers.UserController.Delete(System.Int32)">
+            <summary>
+            Method to delete record
+            </summary>
+            <param name="id">Employee id</param>
+            <returns></returns>
+        </member>
+        <member name="T:Paymaster.ErrorHelper.ApiBusinessException">
+            <summary>
+            Api Business Exception
+            </summary>
+        </member>
+        <member name="M:Paymaster.ErrorHelper.ApiBusinessException.#ctor(System.Int32,System.String,System.Net.HttpStatusCode)">
+            <summary>
+            Public constructor for Api Business Exception
+            </summary>
+            <param name="errorCode"></param>
+            <param name="errorDescription"></param>
+            <param name="httpStatus"></param>
+        </member>
+        <member name="T:Paymaster.ErrorHelper.ApiDataException">
+            <summary>
+            Api Data Exception
+            </summary>
+        </member>
+        <member name="M:Paymaster.ErrorHelper.ApiDataException.#ctor(System.Int32,System.String,System.Net.HttpStatusCode)">
+            <summary>
+            Public constructor for Api Data Exception
+            </summary>
+            <param name="errorCode"></param>
+            <param name="errorDescription"></param>
+            <param name="httpStatus"></param>
+        </member>
+        <member name="T:Paymaster.ErrorHelper.ApiException">
+            <summary>
+            Api Exception
+            </summary>
+        </member>
+        <member name="T:Paymaster.ErrorHelper.IApiExceptions">
+            <summary>
+            IApiExceptions Interface
+            </summary>
+        </member>
+        <member name="P:Paymaster.ErrorHelper.IApiExceptions.ErrorCode">
+            <summary>
+            ErrorCode
+            </summary>
+        </member>
+        <member name="P:Paymaster.ErrorHelper.IApiExceptions.ErrorDescription">
+            <summary>
+            ErrorDescription
+            </summary>
+        </member>
+        <member name="P:Paymaster.ErrorHelper.IApiExceptions.HttpStatus">
+            <summary>
+            HttpStatus
+            </summary>
+        </member>
+        <member name="P:Paymaster.ErrorHelper.IApiExceptions.ReasonPhrase">
+            <summary>
+            ReasonPhrase
+            </summary>
+        </member>
+        <member name="T:Paymaster.Handler.OptionsHandler">
+            <summary>
+            Handles Option calls
+            </summary>
+        </member>
+        <member name="T:Paymaster.Handler.SessionTokenAuthenticationMessageHandler">
+            <summary>
+            Creating an Inner "Message" Handler of HTTP for processing of HTTP response ErrorMessages. 
+            This is used to intercept the calls to RESTFUL Web API Controllers and validate the credentials of the caller.
+            DelegatingHandler- it is an abstract class provided by Web API to allow easy implementation of message handler
+            http://www.asp.net/web-api/overview/security/authentication-and-authorization-in-aspnet-web-api
+            </summary>
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:Paymaster.Handler.SessionTokenAuthenticationMessageHandler.SetPrincipal(Paymaster.DataModel.User,System.String,System.String[])" -->
+        <member name="M:Paymaster.Helpers.Extensions.ToJSON(System.Object)">
+            <summary>
+            Extened method of object class
+            Converts an object to a json string.
+            </summary>
+            <param name="obj"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Paymaster.Helpers.NLogger">
+            <summary>
+            Public class to log Error/info messages to the access log file
+            </summary>
+        </member>
+        <member name="P:Paymaster.Helpers.NLogger.Logger">
+            <summary>
+            Get property for Logger
+            </summary>
+        </member>
+        <member name="M:Paymaster.Helpers.NLogger.Trace(System.Net.Http.HttpRequestMessage,System.String,System.Web.Http.Tracing.TraceLevel,System.Action{System.Web.Http.Tracing.TraceRecord})">
+            <summary>
+            Implementation of TraceWriter to trace the logs.
+            </summary>
+            <param name="request"></param>
+            <param name="category"></param>
+            <param name="level"></param>
+            <param name="traceAction"></param>
+        </member>
+        <member name="M:Paymaster.Helpers.NLogger.Log(System.Web.Http.Tracing.TraceRecord)">
+            <summary>
+            Logs info/Error to Log file
+            </summary>
+            <param name="record"></param>
+        </member>
+        <member name="T:Paymaster.Helpers.ServiceStatus">
+            <summary>
+            Public class to return input status
+            </summary>
+        </member>
+        <member name="P:Paymaster.Helpers.ServiceStatus.StatusCode">
+            <summary>
+            Get/Set property for accessing Status Code
+            </summary>
+        </member>
+        <member name="P:Paymaster.Helpers.ServiceStatus.StatusMessage">
+            <summary>
+            Get/Set property for accessing Status Message
+            </summary>
+        </member>
+        <member name="P:Paymaster.Helpers.ServiceStatus.ReasonPhrase">
+            <summary>
+            Get/Set property for accessing Status Message
+            </summary>
         </member>
     </members>
 </doc>
