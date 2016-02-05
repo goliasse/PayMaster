@@ -41,6 +41,14 @@ namespace Paymaster.BusinessServices.Interfaces
         /// <returns></returns>
         bool DeleteByUserId(int userId);
 
+        /// <summary>
+        /// Function to validate username/password and generate the session token
+        /// </summary>
+        /// <param name="username"></param>
+        /// <param name="password"></param>
+        /// <returns></returns>
+        TokenEntity AuthenticateUser(string username, string password);
+
         #endregion Interface member methods.
     }
 }

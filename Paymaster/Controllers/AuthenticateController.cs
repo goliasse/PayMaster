@@ -7,19 +7,21 @@ using System.Security.Principal;
 using System.Threading;
 using System.Web.Http;
 using Paymaster.BusinessEntities;
+using Paymaster.Security;
 
 namespace Paymaster.Controllers
 { 
     /// <summary>
     /// Provides API for authentication mechanism
     /// </summary>
-    [ApiAuthenticationFilter()]
+    //[ApiAuthenticationFilter()]
     public class AuthenticateController : ApiController
     {
         #region Private variable.
 
         private readonly ITokenService _tokenService;
-        private readonly IUserService _userService;
+        //private readonly IUserService _userService;
+        private readonly IUserSession _userSession;
         #endregion Private variable.
 
         #region Public Constructor
@@ -27,45 +29,70 @@ namespace Paymaster.Controllers
         /// <summary>
         /// Public constructor to initialize product service instance
         /// </summary>
-        public AuthenticateController(ITokenService tokenService, IUserService userService)
+        public AuthenticateController(ITokenService tokenService,  IUserSession userSession)
         {
             _tokenService = tokenService;
-            _userService = userService;
+            _userSession = userSession;
         }
 
         #endregion Public Constructor
 
         /// <summary>
-        /// Authenticates user usign Basic Authentication(username/password in header) and returns token with expiry.
+        /// Login: Returns auth token for the validated user.
         /// </summary>
+        /// <param name="loginRequest"></param>
         /// <returns></returns>
-        public HttpResponseMessage Get()
+        [AllowAnonymous]
+        [HttpPost]
+        //[Route("")]
+        public TokenEntity Login([FromBody] LoginRequest loginRequest)
         {
-            if (System.Threading.Thread.CurrentPrincipal != null && System.Threading.Thread.CurrentPrincipal.Identity.IsAuthenticated)
-            {
-                var basicAuthenticationIdentity = System.Threading.Thread.CurrentPrincipal.Identity as BasicAuthenticationIdentity;
-                if (basicAuthenticationIdentity != null)
-                {
-                    var userId = basicAuthenticationIdentity.UserId;
-                    return GetAuthToken(userId);
-                }
-            }
-            return null;
+            var token = _tokenService.AuthenticateUser(loginRequest.Username, loginRequest.Password);
+            if (token == null) throw new HttpResponseException(HttpStatusCode.Unauthorized);
+            return token;
         }
 
         /// <summary>
-        /// Returns auth token for the validated user.
+        /// Logout : Invalidates the current session
         /// </summary>
-        /// <param name="userId"></param>
-        /// <returns></returns>
-        private HttpResponseMessage GetAuthToken(int userId)
+        [HttpDelete]
+        //[Route("")]
+        public void Logout()
         {
-            var token = _tokenService.GenerateToken(userId);
-            var response = Request.CreateResponse(HttpStatusCode.OK, "Authorized");
-            response.Headers.Add("Token", token.AuthToken);
-            response.Headers.Add("TokenExpiry", ConfigurationManager.AppSettings["AuthTokenExpiry"]);
-            response.Headers.Add("Access-Control-Expose-Headers", "Token,TokenExpiry");
-            return response;
+            _tokenService.Kill(_userSession.SessionToken);
         }
+
+        ///// <summary>
+        ///// Authenticates user usign Basic Authentication(username/password in header) and returns token with expiry.
+        ///// </summary>
+        ///// <returns></returns>
+        //public HttpResponseMessage Get()
+        //{
+        //    if (System.Threading.Thread.CurrentPrincipal != null && System.Threading.Thread.CurrentPrincipal.Identity.IsAuthenticated)
+        //    {
+        //        var basicAuthenticationIdentity = System.Threading.Thread.CurrentPrincipal.Identity as BasicAuthenticationIdentity;
+        //        if (basicAuthenticationIdentity != null)
+        //        {
+        //            var userId = basicAuthenticationIdentity.UserId;
+        //            return GetAuthToken(userId);
+        //        }
+        //    }
+        //    return null;
+        //}
+
+        ///// <summary>
+        ///// Returns auth token for the validated user.
+        ///// </summary>
+        ///// <param name="userId"></param>
+        ///// <returns></returns>
+        //private HttpResponseMessage GetAuthToken(int userId)
+        //{
+        //    var token = _tokenService.GenerateToken(userId);
+        //    var response = Request.CreateResponse(HttpStatusCode.OK, "Authorized");
+        //    response.Headers.Add("Token", token.AuthToken);
+        //    response.Headers.Add("TokenExpiry", ConfigurationManager.AppSettings["AuthTokenExpiry"]);
+        //    response.Headers.Add("Access-Control-Expose-Headers", "Token,TokenExpiry");
+        //    return response;
+        //}
     }
 }

@@ -1,6 +1,10 @@
+using System.Security.Principal;
+using System.Threading;
 using System.Web.Http;
 using Ninject.Web.WebApi;
+using Paymaster.ActionFilters;
 using Paymaster.Filters;
+using Paymaster.Handler;
 using PayMaster.DataAccess;
 
 [assembly: WebActivatorEx.PreApplicationStartMethod(typeof(Paymaster.App_Start.NinjectWebCommon), "Start")]
@@ -15,7 +19,8 @@ namespace Paymaster.App_Start
 
     using Ninject;
     using Ninject.Web.Common;
-
+    using Security;
+    using Ninject.Activation;
     public static class NinjectWebCommon 
     {
         private static readonly Bootstrapper bootstrapper = new Bootstrapper();
@@ -45,7 +50,7 @@ namespace Paymaster.App_Start
         private static IKernel CreateKernel()
         {
             var kernel = new StandardKernel();
-
+            kernel.Settings.AllowNullInjection = true;
             var resolver = new NinjectDependencyResolver(kernel);
             GlobalConfiguration.Configuration.DependencyResolver = resolver;
 
@@ -70,8 +75,22 @@ namespace Paymaster.App_Start
         /// <param name="kernel">The kernel.</param>
         private static void RegisterServices(IKernel kernel)
         {
+            var containerConfigurator = new NinjectConfigurator();
+            containerConfigurator.Configure(kernel);
+            //Modules
             kernel.Load(new RepositoryModule());
             kernel.Load(new BusinessServiceModule());
-        }        
+            
+            //Handlers
+            GlobalConfiguration.Configuration.MessageHandlers.Add(kernel.Get<OptionsHandler>());
+            GlobalConfiguration.Configuration.MessageHandlers.Add(kernel.Get<SessionTokenAuthenticationMessageHandler>());
+
+            //Filters
+            //GlobalConfiguration.Configuration.Filters.Add(kernel.Get<LoggingFilterAttribute>());
+            //GlobalConfiguration.Configuration.Filters.Add(kernel.Get<GlobalExceptionAttribute>());
+            GlobalConfiguration.Configuration.Filters.Add(new AuthorizeAttribute());
+        }
+
+        
     }
 }

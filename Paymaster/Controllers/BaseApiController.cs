@@ -3,7 +3,7 @@ using System.Web.Http;
 
 namespace Paymaster.Controllers
 {
-    [AuthorizationRequired]
+    //[AuthorizationRequired]
     public class BaseApiController : ApiController
     {
         protected string GetReferrerUrl()

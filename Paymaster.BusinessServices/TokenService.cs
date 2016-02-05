@@ -15,7 +15,7 @@ namespace Paymaster.BusinessServices
         #region Private member variables.
 
         private readonly ITokenRepository _tokenRepository;
-        
+        private readonly IUserService _userService;
         #endregion Private member variables.
 
         #region Public constructor.
@@ -23,9 +23,10 @@ namespace Paymaster.BusinessServices
         /// <summary>
         /// Public constructor.
         /// </summary>
-        public TokenService(ITokenRepository tokenRepository)
+        public TokenService(ITokenRepository tokenRepository, IUserService userService)
         {
             _tokenRepository = tokenRepository;
+            _userService = userService;
             Mapper.CreateMap<Token, TokenEntity>();
             Mapper.CreateMap<TokenEntity, Token >();
         }
@@ -57,15 +58,6 @@ namespace Paymaster.BusinessServices
             _tokenRepository.Add(tokendomain);
 
             return Mapper.Map<TokenEntity>(tokendomain);
-            //var tokenModel = new TokenEntity()
-            //{
-            //    UserId = userId,
-            //    IssuedOn = issuedOn,
-            //    ExpiresOn = expiredOn,
-            //    AuthToken = token
-            //};
-            //return tokenModel;
-
         }
         /// <summary>
         /// Method to fetch TokenEntity from database
@@ -130,6 +122,16 @@ namespace Paymaster.BusinessServices
             //_unitOfWork.Save();
             //var isNotDeleted = _unitOfWork.TokenRepository.GetMany(x => x.UserId == userId).Any();
             //return !isNotDeleted;
+        }
+
+        public TokenEntity AuthenticateUser(string username, string password)
+        {
+            var userid = _userService.Authenticate(username, password);
+            if (userid > 0)
+            {
+                return GenerateToken(userid);
+            }
+            return null;
         }
 
         #endregion Public member methods.

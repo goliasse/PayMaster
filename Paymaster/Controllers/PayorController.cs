@@ -11,7 +11,7 @@ using Paymaster.Filters;
 
 namespace Paymaster.Controllers
 {
-    [ApiAuthenticationFilter("admin")]
+    //[ApiAuthenticationFilter("admin")]
     public class PayorController : BaseApiController
     {
         private readonly IPayorService _payorService;
